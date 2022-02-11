@@ -6,10 +6,10 @@ const Category = ({ categories }) => {
 
   return (
     <div>
-      {name}
+      <h1>{name.toUpperCase()}</h1>
       {products?.map((prod) => (
         <li key={prod.id}>
-          <ProductDetail name={prod.name} product={prod} />
+          <ProductDetail product={prod} />
         </li>
       ))}
     </div>

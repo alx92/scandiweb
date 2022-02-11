@@ -9,6 +9,7 @@ const QUERY = gql`
       products {
         id
         name
+        gallery
       }
     }
   }
@@ -17,11 +18,11 @@ const QUERY = gql`
 const Categories = ({ name }) => {
   const { data } = useQuery(QUERY);
 
-  const res = data?.categories?.filter((cat) => cat.name === name);
+  const result = data?.categories?.filter((cat) => cat.name === name);
 
   return (
     <div>
-      {res?.map((cat) => (
+      {result?.map((cat) => (
         <ol key={cat.name}>
           <Category categories={cat} />
         </ol>
