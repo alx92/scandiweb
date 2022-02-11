@@ -1,8 +1,8 @@
 import React from "react";
-import ProductDetail from "./ProductDetail";
+import ProductDetail from "../components/ProductDetail";
 
-const Category = ({ categories }) => {
-  const { name, products } = categories;
+const CategoryType = ({ category }) => {
+  const { name, products } = category;
 
   return (
     <div>
@@ -16,4 +16,4 @@ const Category = ({ categories }) => {
   );
 };
 
-export default Category;
+export default CategoryType;
