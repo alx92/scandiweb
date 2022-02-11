@@ -14,19 +14,18 @@ const QUERY = gql`
   }
 `;
 
-// TODO: how to return conditional data depending on name
-const Categories = () => {
+const Categories = ({ name }) => {
   const { data } = useQuery(QUERY);
+
+  const res = data?.categories?.filter((cat) => cat.name === name);
 
   return (
     <div>
-      {data?.categories?.map((cat) =>
-        cat.name === "all" ? (
-          <ul key={cat.name}>
-            <Category categories={cat} />
-          </ul>
-        ) : null
-      )}
+      {res?.map((cat) => (
+        <ol key={cat.name}>
+          <Category categories={cat} />
+        </ol>
+      ))}
     </div>
   );
 };
