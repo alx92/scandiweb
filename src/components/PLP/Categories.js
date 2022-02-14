@@ -2,7 +2,7 @@ import React from "react";
 import Category from "./Category";
 import { useQuery, gql } from "@apollo/client";
 
-const QUERY = gql`
+export const CATEGORIES = gql`
   query {
     categories {
       name
@@ -10,22 +10,29 @@ const QUERY = gql`
         id
         name
         gallery
+        prices {
+          amount
+          currency {
+            symbol
+            label
+          }
+        }
       }
     }
   }
 `;
 
 const Categories = ({ name }) => {
-  const { data } = useQuery(QUERY);
+  const { data } = useQuery(CATEGORIES);
 
   const result = data?.categories?.filter((cat) => cat.name === name);
 
   return (
     <div>
       {result?.map((cat) => (
-        <ol key={cat.name}>
+        <div key={cat.name}>
           <Category categories={cat} />
-        </ol>
+        </div>
       ))}
     </div>
   );

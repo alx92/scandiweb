@@ -7,8 +7,8 @@ const Header = (props) => {
     <div>
       <nav>
         <Link to="/">All</Link>
-        <Link to="/category/clothes">Clothes</Link>
-        <Link to="/category/tech">Tech</Link>
+        <Link to="clothes">Clothes</Link>
+        <Link to="tech">Tech</Link>
       </nav>
     </div>
   );
