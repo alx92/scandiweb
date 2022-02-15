@@ -8,20 +8,17 @@ const ProductCardDetail = ({ product }) => {
         <img height="50%" width="50%" src={gallery[0]} alt={name}></img>
       </div>
       <div className="small-img-container">
-        <img height="10%" width="10%" src={gallery[1]} alt={name}></img>
-        <img height="10%" width="10%" src={gallery[2]} alt={name}></img>
-        <img height="10%" width="10%" src={gallery[3]} alt={name}></img>
+        {gallery.map((item) => (
+          <img key={item} height="10%" width="10%" src={item} alt={name}></img>
+        ))}
       </div>
       <div className="produc-details">
         <h3>{name}</h3>
         <div className="attributes">
           <h3>{attributes[0].id}:</h3>
-          {attributes[0].items?.map((item) => (
-            <div key={item.id}>
-              {item.displayValue}
-              {item.value}
-            </div>
-          ))}
+          {attributes?.map((attr) =>
+            attr.items?.map((item) => <div key={item.id}>{item.value}</div>)
+          )}
         </div>
         <div dangerouslySetInnerHTML={createMarkup(description)}></div>
         <h3>Price:</h3>

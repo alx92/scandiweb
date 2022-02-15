@@ -2,7 +2,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import QueryResult from "../QueryResult";
 import ProductCardDetail from "./ProductCardDetail";
-import { Outlet } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //data.categories[0].products[0].name;
 
@@ -35,17 +35,15 @@ export const PRODUCT_QUERY = gql`
   }
 `;
 
-// TODO: Fix missing query variable, look into react-router
-
-const ProductCard = ({ id }) => {
+const ProductCard = () => {
+  let params = useParams();
   const { loading, error, data } = useQuery(PRODUCT_QUERY, {
-    variables: { id },
+    variables: { id: params.id },
   });
 
   return (
     <QueryResult error={error} loading={loading} data={data}>
       <ProductCardDetail key={data?.product?.id} product={data?.product} />
-      <Outlet />
     </QueryResult>
   );
 };

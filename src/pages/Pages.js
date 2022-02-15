@@ -11,6 +11,14 @@ const Pages = () => {
         <Route path="clothes" element={<Categories name="clothes" />} />
         <Route path="tech" element={<Categories name="tech" />} />
         <Route path=":id" element={<ProductCard />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
       </Routes>
     </div>
   );
