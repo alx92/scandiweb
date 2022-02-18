@@ -11,7 +11,9 @@ const ProductItem = ({ product }) => {
     <ProdLink to={`/${id}`}>
       <ProdContainer>
         <h4>{id}</h4>
-        <img src={gallery[0]} alt={name}></img>
+
+        <img src={gallery[0]} alt={name} />
+
         <h3>{name}</h3>
         <h4>
           {prices[0].currency.symbol}
