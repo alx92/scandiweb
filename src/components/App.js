@@ -12,6 +12,7 @@ class App extends React.Component {
         <header className="App-header">
           <Header />
         </header>
+        <Pages />
         <Cart />
       </div>
     );
