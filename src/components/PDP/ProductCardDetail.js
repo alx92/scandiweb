@@ -32,7 +32,6 @@ const ProductCardDetail = ({ product }) => {
                       height: "25px",
                       width: "25px",
                     }}
-                    className="options"
                     key={item.id}
                   ></button>
                 ))}
@@ -42,9 +41,7 @@ const ProductCardDetail = ({ product }) => {
                 <h4>{attr.id.toUpperCase()}:</h4>
 
                 {attr.items.map((item) => (
-                  <button className="options" key={item.id}>
-                    {item.value}
-                  </button>
+                  <button key={item.id}>{item.value}</button>
                 ))}
               </div>
             )
@@ -71,7 +68,9 @@ const ProductCardDetail = ({ product }) => {
 
 export default ProductCardDetail;
 
-const MainContainer = styled.div({ display: "flex" });
+const MainContainer = styled.div({
+  display: "flex",
+});
 
 const SmallImages = styled.div({
   border: "1rem solid red",

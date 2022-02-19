@@ -2,19 +2,17 @@ import "../styles/App.css";
 import React from "react";
 import Header from "./Header";
 import Pages from "../pages/Pages";
-import ProductCard from "./PDP/ProductCard";
-import { Outlet } from "react-router-dom";
+import Cart from "../components/Cart/Cart";
 
 class App extends React.Component {
   render() {
-    // render <ProductCard />
+    // render  <Pages />
     return (
       <div className="App">
         <header className="App-header">
-          <h1>ScandiWeb Store </h1>
           <Header />
         </header>
-        <Pages />
+        <Cart />
       </div>
     );
   }
