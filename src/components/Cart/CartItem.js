@@ -1,7 +1,9 @@
 import React from "react";
 
-const CartItem = ({ product }) => {
-  return <div>CartItem</div>;
-};
+class CartItem extends React.Component {
+  render() {
+    return <div>CartItem</div>;
+  }
+}
 
 export default CartItem;

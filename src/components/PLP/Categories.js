@@ -22,10 +22,10 @@ export const CATEGORIES = gql`
   }
 `;
 
-const Categories = ({ name }) => {
+const Categories = (props) => {
   const { data } = useQuery(CATEGORIES);
 
-  const result = data?.categories?.filter((cat) => cat.name === name);
+  const result = data?.categories?.filter((cat) => cat.name === props.name);
 
   return (
     <div>
