@@ -1,8 +1,21 @@
 import React from "react";
+import DOMPurify from "dompurify";
 
 class CartItem extends React.Component {
   render() {
-    return <div>CartItem</div>;
+    const { name, description } = this.props.product;
+
+    return (
+      <div>
+        CartItem
+        {name}
+        <div
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(description),
+          }}
+        />
+      </div>
+    );
   }
 }
 

@@ -3,7 +3,7 @@ import Category from "./Category";
 import { useQuery, gql } from "@apollo/client";
 
 export const CATEGORIES = gql`
-  query {
+  query Categories{
     categories {
       name
       products {

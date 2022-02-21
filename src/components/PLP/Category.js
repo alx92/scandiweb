@@ -7,6 +7,7 @@ class Category extends React.Component {
     return (
       <CategoryContainer>
         <h1>{this.props.categories.name.toUpperCase()}</h1>
+
         {this.props.categories.products?.map((prod) => (
           <div key={prod.id}>
             <ProductItem product={prod} />
