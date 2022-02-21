@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import Price from "../Price";
 import { Link } from "react-router-dom";
 
 class ProductItem extends React.Component {

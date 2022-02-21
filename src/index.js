@@ -1,6 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import "./styles/index.css";
 import App from "./components/App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";

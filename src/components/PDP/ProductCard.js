@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import QueryResult from "../QueryResult";
+import QueryResult from "../../utils/QueryResult";
 import ProductCardDetail from "./ProductCardDetail";
 import { useParams } from "react-router-dom";
 
