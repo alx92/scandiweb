@@ -6,9 +6,11 @@ import { cartItemsVar } from "../../utils/cache";
 function Cart() {
   const cartItems = useReactiveVar(cartItemsVar);
 
+  console.log(cartItems);
+
   return (
     <div className="cart">
-      CART:
+      <h1>CART:</h1>
       {cartItems.length === 0 ? (
         <p>No items in your cart</p>
       ) : (

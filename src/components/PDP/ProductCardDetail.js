@@ -4,7 +4,18 @@ import styled from "@emotion/styled";
 import { cartItemsVar } from "../../utils/cache";
 
 class ProductCardDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      attr: []
+    };
+
+
+  }
+
   render() {
+    console.log(this.state.attr);
+
     return (
       <MainContainer>
         <Gallery>
@@ -28,6 +39,7 @@ class ProductCardDetail extends React.Component {
         </MainImage>
 
         <ProductDetails>
+
           <h3>{this.props.product.name}</h3>
 
           <div className="attributes">
@@ -39,6 +51,15 @@ class ProductCardDetail extends React.Component {
 
                     {attr.items.map((item) => (
                       <button
+                        onClick={() => this.setState({
+                          attr: [
+                            {
+                              id: attr.id,
+                              value: item.value
+                            }
+                          ]
+                        })}
+
                         style={{
                           backgroundColor: `${item.value}`,
                           height: "25px",
@@ -55,6 +76,15 @@ class ProductCardDetail extends React.Component {
 
                     {attr.items.map((item) => (
                       <button
+                        onClick={() => this.setState({
+                          attr: [
+                            {
+                              id: attr.id,
+                              value: item.id
+                            }
+                          ]
+                        })}
+
                         key={item.id}
                       >
                         {item.value}
@@ -73,6 +103,7 @@ class ProductCardDetail extends React.Component {
 
           <button
             onClick={() => cartItemsVar([...cartItemsVar(), this.props.product])}
+
           >
             ADD TO CART
           </button>
@@ -82,6 +113,7 @@ class ProductCardDetail extends React.Component {
               __html: DOMPurify.sanitize(this.props.product.description),
             }}
           />
+
         </ProductDetails>
       </MainContainer>
     );
