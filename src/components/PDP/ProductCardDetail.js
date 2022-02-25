@@ -50,23 +50,26 @@ class ProductCardDetail extends React.Component {
                     <h4>{attr.id.toUpperCase()}:</h4>
 
                     {attr.items.map((item) => (
-                      <button
-                        onClick={() => this.setState({
-                          attr: [
-                            {
-                              id: attr.id,
-                              value: item.value
-                            }
-                          ]
-                        })}
-
+                      <label
                         style={{
                           backgroundColor: `${item.value}`,
                           height: "25px",
                           width: "25px",
                         }}
-                        key={item.id}
-                      ></button>
+                        key={item.id}>
+                        <input
+                          type="radio"
+                          name={attr.id}
+                          onClick={() => this.setState({
+                            attr: [
+                              {
+                                id: attr.id,
+                                value: item.value
+                              }
+                            ]
+                          })}
+                        ></input>
+                      </label>
                     ))}
                   </div>
                 ) :
@@ -75,20 +78,22 @@ class ProductCardDetail extends React.Component {
                     <h4>{attr.id.toUpperCase()}:</h4>
 
                     {attr.items.map((item) => (
-                      <button
-                        onClick={() => this.setState({
-                          attr: [
-                            {
-                              id: attr.id,
-                              value: item.id
-                            }
-                          ]
-                        })}
-
-                        key={item.id}
-                      >
+                      <label
+                        key={item.id}>
                         {item.value}
-                      </button>
+                        <input
+                          type="radio"
+                          name={attr.id}
+                          onClick={() => this.setState({
+                            attr: [
+                              {
+                                id: attr.id,
+                                value: item.value
+                              }
+                            ]
+                          })}
+                        ></input>
+                      </label>
                     ))}
                   </div>
                 )
