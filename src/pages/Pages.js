@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Categories from "../components/PLP/Categories";
-import ProductCard from "../components/PDP/ProductCard";
+import Product from "../components/PDP/Product";
 
 const Pages = () => {
   return (
@@ -10,7 +10,7 @@ const Pages = () => {
         <Route path="/" element={<Categories name="all" />} />
         <Route path="clothes" element={<Categories name="clothes" />} />
         <Route path="tech" element={<Categories name="tech" />} />
-        <Route path=":id" element={<ProductCard />} />
+        <Route path=":id" element={<Product />} />
         <Route
           path="*"
           element={

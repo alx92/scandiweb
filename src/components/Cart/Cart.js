@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import CartItem from "./CartItem";
-import { useReactiveVar } from "@apollo/client"
+import { useReactiveVar } from "@apollo/client";
 import { cartItemsVar } from "../../utils/cache";
 
-function Cart() {
+function Cart(props) {
   const cartItems = useReactiveVar(cartItemsVar);
 
-  // console.log(cartItems);
+  console.log(cartItems);
 
   return (
     <div className="cart">
@@ -15,14 +15,13 @@ function Cart() {
         <p>No items in your cart</p>
       ) : (
         <>
-          {cartItems.map(product => (
-            <CartItem key={product.id} product={product} />
+          {cartItems.map((product) => (
+            <CartItem key={product.id + Math.random() * 10} product={product} />
           ))}
         </>
       )}
     </div>
-  )
+  );
 }
-
 
 export default Cart;

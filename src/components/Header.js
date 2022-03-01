@@ -6,9 +6,14 @@ const Header = () => {
   return (
     <div>
       <nav>
-        <LinkStyle to="/">All</LinkStyle>
-        <LinkStyle to="clothes">Clothes</LinkStyle>
-        <LinkStyle to="tech">Tech</LinkStyle>
+        <div className="left">
+          <LinkStyle to="/">All</LinkStyle>
+          <LinkStyle to="clothes">Clothes</LinkStyle>
+          <LinkStyle to="tech">Tech</LinkStyle>
+        </div>
+        <div className="right">
+
+        </div>
       </nav>
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-class ProductItem extends React.Component {
+class ProductCard extends React.Component {
   render() {
     return (
       <ProdLink to={`/${this.props.product.id}`}>
@@ -25,7 +25,7 @@ class ProductItem extends React.Component {
   }
 }
 
-export default ProductItem;
+export default ProductCard;
 
 const ProdContainer = styled.div({
   backgroundColor: "#2eab4f",

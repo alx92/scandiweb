@@ -1,5 +1,5 @@
 import React from "react";
-import ProductItem from "./ProductItem";
+import ProductCard from "./ProductCard";
 import styled from "@emotion/styled";
 
 class Category extends React.Component {
@@ -10,7 +10,7 @@ class Category extends React.Component {
 
         {this.props.categories.products?.map((prod) => (
           <div key={prod.id}>
-            <ProductItem product={prod} />
+            <ProductCard product={prod} />
           </div>
         ))}
       </CategoryContainer>

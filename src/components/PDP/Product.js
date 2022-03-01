@@ -1,7 +1,7 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import QueryResult from "../../utils/QueryResult";
-import ProductCardDetail from "./ProductCardDetail";
+import ProductDetail from "./ProductDetail";
 import { useParams } from "react-router-dom";
 
 export const PRODUCT_QUERY = gql`
@@ -31,7 +31,7 @@ export const PRODUCT_QUERY = gql`
   }
 `;
 
-const ProductCard = () => {
+const Product = () => {
   let params = useParams();
   const { loading, error, data } = useQuery(PRODUCT_QUERY, {
     variables: { id: params.id },
@@ -39,9 +39,9 @@ const ProductCard = () => {
 
   return (
     <QueryResult error={error} loading={loading} data={data}>
-      <ProductCardDetail key={data?.product?.id} product={data?.product} />
+      <ProductDetail key={data?.product?.id} product={data?.product} />
     </QueryResult>
   );
 };
 
-export default ProductCard;
+export default Product;
