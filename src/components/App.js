@@ -6,7 +6,7 @@ import Cart from "../components/Cart/Cart";
 class App extends React.Component {
   render() {
     return (
-      <div >
+      <div>
         <Header />
         <Pages />
         <Cart />

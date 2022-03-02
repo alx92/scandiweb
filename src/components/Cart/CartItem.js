@@ -4,24 +4,21 @@ class CartItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {
-        ...this.props.product,
-        qty: this.props.product.qty,
-      },
+      qty: this.props.product.qty,
     };
   }
 
   render() {
-    console.log(this.state.product);
-    const { name, gallery, prices, attributes, qty } = this.state.product;
+    // console.log(this.state.product);
+    const { name, gallery, prices, attributes, qty } = this.props.product;
 
     return (
       <div>
         <h3>{name}</h3>
-        <h2>
+        <h3>
           {prices[0].currency.symbol}
           {prices[0].amount * qty}
-        </h2>
+        </h3>
         <div className="attributes">
           {attributes.map((attr) =>
             attr.type === "swatch" ? (
@@ -44,9 +41,11 @@ class CartItem extends React.Component {
             )
           )}
         </div>
-        <button>+</button>
+        <button onClick={() => this.props.handleAdd()}>+</button>
         <span>Qty:{qty}</span>
-        <button>-</button>
+        <button onClick={() => this.props.handleRemove(this.props.product)}>
+          -
+        </button>
       </div>
     );
   }
