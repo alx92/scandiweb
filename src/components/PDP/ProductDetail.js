@@ -51,10 +51,6 @@ class ProductDetail extends React.Component {
         this.arraysEqual(item.attributes, finalProd.attributes)
     );
 
-    console.log(finalProd);
-    console.log(cartItems);
-    console.log(alreadyAdded);
-
     if (alreadyAdded) {
       cartItems = cartItems.map((item) =>
         item.id === finalProd.id &&
