@@ -65,16 +65,20 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    console.log(this.state.attr);
+    // console.log(this.state.attr);
+    const { name, gallery, attributes, prices, description } =
+      this.props.product;
+
+    console.log(this.props.product);
 
     return (
       <MainContainer>
         <Gallery>
-          {this.props.product.gallery.slice(1).map((item) => (
+          {gallery.slice(1).map((item) => (
             <FitImage key={item}>
               <img
                 src={item}
-                alt={this.props.product.name}
+                alt={name}
                 onClick={() => {
                   this.featuredImg.current.src = item;
                 }}
@@ -84,18 +88,14 @@ class ProductDetail extends React.Component {
         </Gallery>
 
         <MainImage>
-          <img
-            ref={this.featuredImg}
-            src={this.props.product.gallery[0]}
-            alt={this.props.product.name}
-          ></img>
+          <img ref={this.featuredImg} src={gallery[0]} alt={name}></img>
         </MainImage>
 
         <ProductDetails>
-          <h3>{this.props.product.name}</h3>
+          <h3>{name}</h3>
 
           <div className="attributes">
-            {this.props.product.attributes.map((attr) =>
+            {attributes.map((attr) =>
               attr.type === "swatch" ? (
                 <div key={attr.id}>
                   <h4>{attr.id.toUpperCase()}:</h4>
@@ -164,8 +164,8 @@ class ProductDetail extends React.Component {
 
           <h3>PRICE:</h3>
           <h2>
-            {this.props.product.prices[0].currency.symbol}
-            {this.props.product.prices[0].amount}
+            {prices[0].currency.symbol}
+            {prices[0].amount}
           </h2>
 
           <button
@@ -182,7 +182,7 @@ class ProductDetail extends React.Component {
 
           <div
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(this.props.product.description),
+              __html: DOMPurify.sanitize(description),
             }}
           />
         </ProductDetails>

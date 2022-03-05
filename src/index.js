@@ -1,22 +1,27 @@
 import React from "react";
 import { render } from "react-dom";
 import App from "./components/App";
-import { ApolloClient, ApolloProvider } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
-import { cache } from "./utils/cache";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import rootReducer from "./features/reducers/rootReducer";
+import prodReducer from "./features/reducers/prodReducer";
+import catReducer from "./features/reducers/catReducer";
+import fetchProduct from "./features/actions/productActions";
 
-const client = new ApolloClient({
-  uri: "http://localhost:4000/",
-  cache: cache,
-});
-
-render(
-  <BrowserRouter>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </BrowserRouter>,
-  document.getElementById("root")
+const enhancers = compose(
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-export default client;
+export const store = createStore(catReducer, enhancers);
+
+render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
+);

@@ -1,23 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-class ProductCard extends React.Component {
+class ProductCard extends Component {
   render() {
+    const { id, gallery, name, prices } = this.props.product;
+
     return (
-      <ProdLink to={`/${this.props.product.id}`}>
+      <ProdLink to={`/${id}`}>
         <ProdContainer>
-          <h4>{this.props.product.id}</h4>
+          <h4>{id}</h4>
 
-          <img
-            src={this.props.product.gallery[0]}
-            alt={this.props.product.name}
-          />
+          <img src={gallery[0]} alt={name} />
 
-          <h3>{this.props.product.name}</h3>
+          <h3>{name}</h3>
           <h4>
-            {this.props.product.prices[0].currency.symbol}
-            {this.props.product.prices[0].amount}
+            {prices[0].currency.symbol}
+            {prices[0].amount}
           </h4>
         </ProdContainer>
       </ProdLink>

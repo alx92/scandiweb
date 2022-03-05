@@ -1,14 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 import ProductCard from "./ProductCard";
 import styled from "@emotion/styled";
 
-class Category extends React.Component {
+class Category extends Component {
   render() {
+    const { name, products } = this.props.categories;
+
     return (
       <CategoryContainer>
-        <h1>{this.props.categories.name.toUpperCase()}</h1>
+        <h1>{name.toUpperCase()}</h1>
 
-        {this.props.categories.products?.map((prod) => (
+        {products.map((prod) => (
           <div key={prod.id}>
             <ProductCard product={prod} />
           </div>

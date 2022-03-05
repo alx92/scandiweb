@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ProductDetail from "./ProductDetail";
-import withRouter from "../../utils/withRouter";
 import fetchCategories from "../../features/actions/categoryActions";
+import Category from "./Category";
 
-class Product extends Component {
+class CategoryList extends Component {
   componentDidMount() {
     this.props.dispatch(fetchCategories());
     console.log(fetchCategories());
   }
 
   render() {
-    const { loading, error, categories } = this.props;
+    const { error, loading, categories } = this.props;
+
+    console.log(categories);
 
     if (error) {
       return <div>Error! {error.message}</div>;
@@ -20,11 +21,19 @@ class Product extends Component {
     if (loading) {
       return <div>Loading...</div>;
     }
-    const product = categories[0].products.find(
-      (prod) => prod.id === this.props.params.id
-    );
 
-    return <ProductDetail key={product.id} product={product} />;
+    const result = categories.filter((cat) => cat.name === this.props.name);
+
+    console.log(result);
+    return (
+      <div>
+        {result?.map((cat) => (
+          <div key={cat.name}>
+            <Category categories={cat} />
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 
@@ -34,4 +43,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(withRouter(Product));
+export default connect(mapStateToProps)(CategoryList);
