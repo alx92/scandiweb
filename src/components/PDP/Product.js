@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProductDetail from "./ProductDetail";
 import withRouter from "../../utils/withRouter";
-import fetchCategories from "../../features/actions/categoryActions";
+import fetchCategories from "../../redux/categoryActions";
 
 class Product extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchCategories());
-    console.log(fetchCategories());
-  }
+  // componentDidMount() {
+  //   this.props.dispatch(fetchCategories());
+  // }
 
   render() {
     const { loading, error, categories } = this.props;

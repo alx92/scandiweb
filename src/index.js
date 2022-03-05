@@ -1,14 +1,10 @@
-import React from "react";
 import { render } from "react-dom";
 import App from "./components/App";
 import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import rootReducer from "./features/reducers/rootReducer";
-import prodReducer from "./features/reducers/prodReducer";
-import catReducer from "./features/reducers/catReducer";
-import fetchProduct from "./features/actions/productActions";
+import catReducer from "./redux/catReducer";
 
 const enhancers = compose(
   applyMiddleware(thunk),
@@ -16,6 +12,8 @@ const enhancers = compose(
 );
 
 export const store = createStore(catReducer, enhancers);
+
+console.log(store.getState());
 
 render(
   <Provider store={store}>
