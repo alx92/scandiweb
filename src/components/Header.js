@@ -12,7 +12,9 @@ class Header extends Component {
             <LinkStyle to="clothes">Clothes</LinkStyle>
             <LinkStyle to="tech">Tech</LinkStyle>
           </div>
-          <div className="right"></div>
+          <div className="right">
+            <LinkStyle to="/cart">Cart</LinkStyle>
+          </div>
         </nav>
       </div>
     );

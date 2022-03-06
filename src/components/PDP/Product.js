@@ -13,6 +13,7 @@ class Product extends Component {
         key={product.id}
         product={product}
         handleOptions={this.props.handleOptions}
+        handleAddItem={this.props.handleAddItem}
       />
     );
   }

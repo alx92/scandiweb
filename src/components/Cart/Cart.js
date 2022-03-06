@@ -3,10 +3,10 @@ import CartItem from "./CartItem";
 
 class Cart extends Component {
   render() {
-    const { cartItems } = this.props;
+    const cartItems = this.props.cartItems;
     return (
       <div className="cart">
-        {/* <h1>CART:</h1>
+        <h1>CART:</h1>
         {cartItems.length === 0 ? (
           <p>No items in your cart.</p>
         ) : (
@@ -20,7 +20,7 @@ class Cart extends Component {
             <h3>TOTAL:</h3>
             <h2></h2>
           </div>
-        )} */}
+        )}
       </div>
     );
   }

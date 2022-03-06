@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./Header";
 import Pages from "../pages/Pages";
-import Cart from "../components/Cart/Cart";
 
 class App extends React.Component {
   constructor(props) {
@@ -10,13 +9,15 @@ class App extends React.Component {
       categories: [],
       isFetching: true,
       attr: [],
+      cartItems: [],
+      total: 0,
     };
 
     this.handleOptions = this.handleOptions.bind(this);
+    this.handleAddItem = this.handleAddItem.bind(this);
   }
 
   handleOptions(attr, item) {
-    console.log(attr, item);
     this.setState({
       attr: [
         {
@@ -59,9 +60,9 @@ class App extends React.Component {
     };
   }
 
-  addItem(prod) {
+  handleAddItem(prod) {
     const finalProd = this.filterProd(prod);
-    var cartItems;
+    var cartItems = this.state.cartItems;
     const alreadyAdded = cartItems.find(
       (item) =>
         item.id === finalProd.id &&
@@ -75,9 +76,9 @@ class App extends React.Component {
           ? { ...alreadyAdded, qty: alreadyAdded.qty + 1 }
           : item
       );
-      // cartItemsVar([...cartItems]);
+      this.setState({ cartItems: [...cartItems] });
     } else {
-      // cartItemsVar([...cartItems, { ...finalProd, qty: 1 }]);
+      this.setState({ cartItems: [...cartItems, { ...finalProd, qty: 1 }] });
     }
   }
 
@@ -131,12 +132,16 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.attr);
+    console.log(this.state.cartItems);
     return (
       <div>
         <Header />
-        <Pages cat={this.state.categories} handleOptions={this.handleOptions} />
-        <Cart />
+        <Pages
+          cat={this.state.categories}
+          cartItems={this.state.cartItems}
+          handleOptions={this.handleOptions}
+          handleAddItem={this.handleAddItem}
+        />
       </div>
     );
   }

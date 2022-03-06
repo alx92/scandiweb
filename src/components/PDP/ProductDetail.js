@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import DOMPurify from "dompurify";
 import styled from "@emotion/styled";
-import { cartItemsVar } from "../../utils/cache";
+import AttributeSet from "./AttributeSet";
 
-class ProductDetail extends React.Component {
+class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.featuredImg = React.createRef();
@@ -17,7 +17,7 @@ class ProductDetail extends React.Component {
     return (
       <MainContainer>
         <Gallery>
-          {gallery.slice(1).map((item) => (
+          {gallery.map((item) => (
             <FitImage key={item}>
               <img
                 src={item}
@@ -37,51 +37,10 @@ class ProductDetail extends React.Component {
         <ProductDetails>
           <h3>{name}</h3>
 
-          <div className="attributes">
-            {attributes.map((attr) =>
-              attr.type === "swatch" ? (
-                <div key={attr.id}>
-                  <h4>{attr.id.toUpperCase()}:</h4>
-
-                  <fieldset>
-                    {attr.items.map((item) => (
-                      <label
-                        style={{
-                          backgroundColor: `${item.value}`,
-                          height: "25px",
-                          width: "25px",
-                        }}
-                        key={item.id}
-                      >
-                        <input
-                          type="radio"
-                          name={attr.id}
-                          onClick={() => this.props.handleOptions(attr, item)}
-                        ></input>
-                      </label>
-                    ))}
-                  </fieldset>
-                </div>
-              ) : (
-                <div key={attr.id}>
-                  <h4>{attr.id.toUpperCase()}:</h4>
-
-                  <fieldset>
-                    {attr.items.map((item) => (
-                      <label key={item.id}>
-                        {item.value}
-                        <input
-                          type="radio"
-                          name={attr.id}
-                          onClick={() => this.props.handleOptions(attr, item)}
-                        ></input>
-                      </label>
-                    ))}
-                  </fieldset>
-                </div>
-              )
-            )}
-          </div>
+          <AttributeSet
+            attributes={attributes}
+            handleOptions={this.props.handleOptions}
+          />
 
           <h3>PRICE:</h3>
           <h2>
@@ -89,7 +48,7 @@ class ProductDetail extends React.Component {
             {prices[0].amount}
           </h2>
 
-          <button onClick={() => this.props.addItem(this.props.product)}>
+          <button onClick={() => this.props.handleAddItem(this.props.product)}>
             ADD TO CART
           </button>
 

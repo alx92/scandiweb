@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import CategoryList from "../components/PLP/CategoryList";
 import Product from "../components/PDP/Product";
+import Cart from "../components/Cart/Cart";
 
 class Pages extends Component {
   render() {
@@ -21,8 +22,16 @@ class Pages extends Component {
           <Route
             path="/:id"
             element={
-              <Product cat={cat} handleOptions={this.props.handleOptions} />
+              <Product
+                cat={cat}
+                handleOptions={this.props.handleOptions}
+                handleAddItem={this.props.handleAddItem}
+              />
             }
+          />
+          <Route
+            path="/cart"
+            element={<Cart cartItems={this.props.cartItems} />}
           />
           <Route
             path="*"
