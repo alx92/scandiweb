@@ -8,9 +8,13 @@ class Product extends Component {
       (prod) => prod.id === this.props.params.id
     );
 
-    console.log(product);
-
-    return <ProductDetail key={product.id} product={product} />;
+    return (
+      <ProductDetail
+        key={product.id}
+        product={product}
+        handleOptions={this.props.handleOptions}
+      />
+    );
   }
 }
 

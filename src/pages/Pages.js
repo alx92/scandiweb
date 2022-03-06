@@ -18,7 +18,12 @@ class Pages extends Component {
             path="/tech"
             element={<CategoryList name="tech" cat={cat} />}
           />
-          <Route path="/:id" element={<Product cat={cat} />} />
+          <Route
+            path="/:id"
+            element={
+              <Product cat={cat} handleOptions={this.props.handleOptions} />
+            }
+          />
           <Route
             path="*"
             element={

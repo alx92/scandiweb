@@ -7,61 +7,6 @@ class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
     this.featuredImg = React.createRef();
-    this.state = {
-      attr: [],
-    };
-  }
-
-  objectsEqual(o1, o2) {
-    return (
-      Object.keys(o1).length === Object.keys(o2).length &&
-      Object.keys(o1).every((p) => o1[p] === o2[p])
-    );
-  }
-
-  arraysEqual(a1, a2) {
-    return (
-      a1.length === a2.length &&
-      a1.every((item, index) => this.objectsEqual(item, a2[index]))
-    );
-  }
-
-  filterProd() {
-    let options = this.state.attr;
-
-    options = options.filter(
-      (value, index, self) =>
-        index === self.findIndex((obj) => obj.id === value.id)
-    );
-
-    return {
-      id: this.props.product.id,
-      name: this.props.product.name,
-      attributes: options,
-      prices: this.props.product.prices,
-    };
-  }
-
-  addItem() {
-    const finalProd = this.filterProd();
-    var cartItems = cartItemsVar();
-    const alreadyAdded = cartItems.find(
-      (item) =>
-        item.id === finalProd.id &&
-        this.arraysEqual(item.attributes, finalProd.attributes)
-    );
-
-    if (alreadyAdded) {
-      cartItems = cartItems.map((item) =>
-        item.id === finalProd.id &&
-        this.arraysEqual(item.attributes, finalProd.attributes)
-          ? { ...alreadyAdded, qty: alreadyAdded.qty + 1 }
-          : item
-      );
-      cartItemsVar([...cartItems]);
-    } else {
-      cartItemsVar([...cartItems, { ...finalProd, qty: 1 }]);
-    }
   }
 
   render() {
@@ -111,18 +56,7 @@ class ProductDetail extends React.Component {
                         <input
                           type="radio"
                           name={attr.id}
-                          onClick={() =>
-                            this.setState({
-                              attr: [
-                                {
-                                  id: attr.id,
-                                  value: item.value,
-                                  type: attr.type,
-                                },
-                                ...this.state.attr,
-                              ],
-                            })
-                          }
+                          onClick={() => this.props.handleOptions(attr, item)}
                         ></input>
                       </label>
                     ))}
@@ -139,18 +73,7 @@ class ProductDetail extends React.Component {
                         <input
                           type="radio"
                           name={attr.id}
-                          onClick={() =>
-                            this.setState({
-                              attr: [
-                                {
-                                  id: attr.id,
-                                  value: item.value,
-                                  type: attr.type,
-                                },
-                                ...this.state.attr,
-                              ],
-                            })
-                          }
+                          onClick={() => this.props.handleOptions(attr, item)}
                         ></input>
                       </label>
                     ))}
@@ -166,15 +89,7 @@ class ProductDetail extends React.Component {
             {prices[0].amount}
           </h2>
 
-          <button
-            onClick={() => {
-              this.addItem();
-
-              // { cartItemsVar([...cartItemsVar(), finalProd]); }
-
-              // if (finalProd.attributes.length === 0 && finalProd.id !== 'apple-airtag')
-            }}
-          >
+          <button onClick={() => this.props.addItem(this.props.product)}>
             ADD TO CART
           </button>
 
