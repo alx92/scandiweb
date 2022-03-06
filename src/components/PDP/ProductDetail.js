@@ -69,8 +69,6 @@ class ProductDetail extends React.Component {
     const { name, gallery, attributes, prices, description } =
       this.props.product;
 
-    console.log(this.props.product);
-
     return (
       <MainContainer>
         <Gallery>

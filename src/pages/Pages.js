@@ -5,13 +5,20 @@ import Product from "../components/PDP/Product";
 
 class Pages extends Component {
   render() {
+    const cat = this.props.cat;
     return (
       <div>
         <Routes>
-          <Route path="/" element={<CategoryList name="all" />} />
-          <Route path="/clothes" element={<CategoryList name="clothes" />} />
-          <Route path="/tech" element={<CategoryList name="tech" />} />
-          <Route path=":id" element={<Product />} />
+          <Route path="/" element={<CategoryList name="all" cat={cat} />} />
+          <Route
+            path="/clothes"
+            element={<CategoryList name="clothes" cat={cat} />}
+          />
+          <Route
+            path="/tech"
+            element={<CategoryList name="tech" cat={cat} />}
+          />
+          <Route path="/:id" element={<Product cat={cat} />} />
           <Route
             path="*"
             element={
