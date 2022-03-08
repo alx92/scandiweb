@@ -6,24 +6,26 @@ import Cart from "../components/Cart/Cart";
 
 class Pages extends Component {
   render() {
-    const cat = this.props.cat;
     return (
       <div>
         <Routes>
-          <Route path="/" element={<CategoryList name="all" cat={cat} />} />
+          <Route
+            path="/"
+            element={<CategoryList name="all" cat={this.props.cat} />}
+          />
           <Route
             path="/clothes"
-            element={<CategoryList name="clothes" cat={cat} />}
+            element={<CategoryList name="clothes" cat={this.props.cat} />}
           />
           <Route
             path="/tech"
-            element={<CategoryList name="tech" cat={cat} />}
+            element={<CategoryList name="tech" cat={this.props.cat} />}
           />
           <Route
             path="/:id"
             element={
               <Product
-                cat={cat}
+                cat={this.props.cat}
                 handleOptions={this.props.handleOptions}
                 handleAddItem={this.props.handleAddItem}
               />
@@ -31,7 +33,15 @@ class Pages extends Component {
           />
           <Route
             path="/cart"
-            element={<Cart cartItems={this.props.cartItems} />}
+            element={
+              <Cart
+                cartItems={this.props.cartItems}
+                total={this.props.total}
+                handleAddQty={this.props.handleAddQty}
+                handleSubQty={this.props.handleSubQty}
+                handleRemove={this.props.handleRemove}
+              />
+            }
           />
           <Route
             path="*"

@@ -1,23 +1,16 @@
 import React from "react";
 
 class CartItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      qty: this.props.product.qty,
-    };
-  }
-
   render() {
-    // console.log(this.state.product);
-    const { name, gallery, prices, attributes } = this.props.product;
+    const { name, gallery, prices, attributes, qty } = this.props.product;
+    // console.log("CartItem re-rendered!");
 
     return (
       <div className="cart-item">
         <h3>{name}</h3>
         <h3>
           {prices[0].currency.symbol}
-          {prices[0].amount * this.state.qty}
+          {(Math.round(prices[0].amount * qty * 100) / 100).toFixed(2)}
         </h3>
         <div className="attributes">
           {attributes.map((attr) =>
@@ -41,14 +34,14 @@ class CartItem extends React.Component {
             )
           )}
         </div>
-        <button onClick={() => this.setState({ qty: this.state.qty + 1 })}>
+        <button onClick={() => this.props.handleAddQty(this.props.product)}>
           +
         </button>
-        <span>Qty:{this.state.qty}</span>
+        <span>Qty:{qty}</span>
         <button
           onClick={() => {
-            if (this.state.qty > 1) {
-              this.setState({ qty: this.state.qty - 1 });
+            if (qty > 1) {
+              this.props.handleSubQty(this.props.product);
             } else {
               this.props.handleRemove(this.props.product);
             }

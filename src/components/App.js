@@ -15,6 +15,9 @@ class App extends React.Component {
 
     this.handleOptions = this.handleOptions.bind(this);
     this.handleAddItem = this.handleAddItem.bind(this);
+    this.handleAddQty = this.handleAddQty.bind(this);
+    this.handleSubQty = this.handleSubQty.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   handleOptions(attr, item) {
@@ -62,24 +65,94 @@ class App extends React.Component {
 
   handleAddItem(prod) {
     const finalProd = this.filterProd(prod);
-    var cartItems = this.state.cartItems;
-    const alreadyAdded = cartItems.find(
+    let copyCartItems = [...this.state.cartItems];
+    const alreadyAdded = copyCartItems.find(
       (item) =>
         item.id === finalProd.id &&
         this.arraysEqual(item.attributes, finalProd.attributes)
     );
 
     if (alreadyAdded) {
-      cartItems = cartItems.map((item) =>
+      copyCartItems = copyCartItems.map((item) =>
         item.id === finalProd.id &&
         this.arraysEqual(item.attributes, finalProd.attributes)
           ? { ...alreadyAdded, qty: alreadyAdded.qty + 1 }
           : item
       );
-      this.setState({ cartItems: [...cartItems] });
+      this.setState({
+        cartItems: [...copyCartItems],
+        total:
+          this.state.total + alreadyAdded.prices[0].amount * alreadyAdded.qty,
+        attr: [],
+      });
     } else {
-      this.setState({ cartItems: [...cartItems, { ...finalProd, qty: 1 }] });
+      this.setState({
+        cartItems: [...copyCartItems, { ...finalProd, qty: 1 }],
+        total: this.state.total + finalProd.prices[0].amount,
+        attr: [],
+      });
     }
+  }
+
+  handleAddQty(prod) {
+    let queriedProd = this.state.cartItems.find(
+      (item) =>
+        item.id === prod.id &&
+        this.arraysEqual(item.attributes, prod.attributes)
+    );
+    const indexQueriedProd = this.state.cartItems.findIndex(
+      (item) =>
+        item.id === prod.id &&
+        this.arraysEqual(item.attributes, prod.attributes)
+    );
+
+    queriedProd = { ...queriedProd, qty: queriedProd.qty + 1 };
+
+    let newCartItems = this.state.cartItems;
+    newCartItems[indexQueriedProd] = queriedProd;
+
+    this.setState({
+      cartItems: newCartItems,
+      total: this.state.total + queriedProd.prices[0].amount,
+    });
+  }
+
+  handleSubQty(prod) {
+    let queriedProd = this.state.cartItems.find(
+      (item) =>
+        item.id === prod.id &&
+        this.arraysEqual(item.attributes, prod.attributes)
+    );
+    const indexQueriedProd = this.state.cartItems.findIndex(
+      (item) =>
+        item.id === prod.id &&
+        this.arraysEqual(item.attributes, prod.attributes)
+    );
+
+    queriedProd = { ...queriedProd, qty: queriedProd.qty - 1 };
+
+    let newCartItems = [...this.state.cartItems];
+    newCartItems[indexQueriedProd] = queriedProd;
+
+    this.setState({
+      cartItems: [...newCartItems],
+      total: this.state.total - queriedProd.prices[0].amount,
+    });
+  }
+
+  handleRemove(prod) {
+    const indexQueriedProd = this.state.cartItems.findIndex(
+      (item) =>
+        item.id === prod.id &&
+        this.arraysEqual(item.attributes, prod.attributes)
+    );
+    let copyCartItems = [...this.state.cartItems];
+    copyCartItems.splice(indexQueriedProd, 1);
+
+    this.setState({
+      cartItems: [...copyCartItems],
+      total: this.state.total - prod.prices[0].amount,
+    });
   }
 
   async componentDidMount() {
@@ -139,8 +212,12 @@ class App extends React.Component {
         <Pages
           cat={this.state.categories}
           cartItems={this.state.cartItems}
+          total={this.state.total}
           handleOptions={this.handleOptions}
           handleAddItem={this.handleAddItem}
+          handleAddQty={this.handleAddQty}
+          handleSubQty={this.handleSubQty}
+          handleRemove={this.handleRemove}
         />
       </div>
     );
