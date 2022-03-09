@@ -2,7 +2,7 @@ import React from "react";
 
 class CartItem extends React.Component {
   render() {
-    const { name, gallery, prices, attributes, qty } = this.props.product;
+    const { name, prices, attributes, qty } = this.props.product;
     // console.log("CartItem re-rendered!");
 
     return (
@@ -30,6 +30,7 @@ class CartItem extends React.Component {
               <div key={attr.id}>
                 <h4>{attr.id.toUpperCase()}:</h4>
                 <img
+                  alt=""
                   style={{
                     backgroundColor: `${attr.value}`,
                     height: "25px",

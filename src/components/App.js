@@ -93,7 +93,7 @@ class App extends React.Component {
             this.state.total +
             alreadyAdded.prices.find(
               (price) => price.currency.symbol === this.state.symbol
-            ).currency.amount *
+            ).amount *
               alreadyAdded.qty,
           attr: [],
         });
