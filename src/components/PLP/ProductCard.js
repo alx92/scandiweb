@@ -10,13 +10,19 @@ class ProductCard extends Component {
       <ProdLink to={`/${id}`}>
         <ProdContainer>
           <h4>{id}</h4>
-
           <img src={gallery[0]} alt={name} />
-
           <h3>{name}</h3>
           <h4>
-            {prices[0].currency.symbol}
-            {prices[0].amount}
+            {
+              prices.find(
+                (price) => price.currency.symbol === this.props.symbol
+              ).currency.symbol
+            }
+            {
+              prices.find(
+                (price) => price.currency.symbol === this.props.symbol
+              ).amount
+            }
           </h4>
         </ProdContainer>
       </ProdLink>

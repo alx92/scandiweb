@@ -16,13 +16,17 @@ class Cart extends Component {
               <CartItem
                 key={product.id + Math.random() * 10}
                 product={product}
+                symbol={this.props.symbol}
                 handleAddQty={this.props.handleAddQty}
                 handleSubQty={this.props.handleSubQty}
                 handleRemove={this.props.handleRemove}
               />
             ))}
             <h3>TOTAL:</h3>
-            <h3>{(Math.round(this.props.total * 100) / 100).toFixed(2)}</h3>
+            <h3>
+              {this.props.symbol}
+              {(Math.round(this.props.total * 100) / 100).toFixed(2)}
+            </h3>
           </div>
         )}
       </div>

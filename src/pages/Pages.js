@@ -11,21 +11,41 @@ class Pages extends Component {
         <Routes>
           <Route
             path="/"
-            element={<CategoryList name="all" cat={this.props.cat} />}
+            element={
+              <CategoryList
+                name="all"
+                cat={this.props.cat}
+                currencies={this.props.currencies}
+                symbol={this.props.symbol}
+              />
+            }
           />
           <Route
             path="/clothes"
-            element={<CategoryList name="clothes" cat={this.props.cat} />}
+            element={
+              <CategoryList
+                name="clothes"
+                cat={this.props.cat}
+                symbol={this.props.symbol}
+              />
+            }
           />
           <Route
             path="/tech"
-            element={<CategoryList name="tech" cat={this.props.cat} />}
+            element={
+              <CategoryList
+                name="tech"
+                cat={this.props.cat}
+                symbol={this.props.symbol}
+              />
+            }
           />
           <Route
             path="/:id"
             element={
               <Product
                 cat={this.props.cat}
+                symbol={this.props.symbol}
                 handleOptions={this.props.handleOptions}
                 handleAddItem={this.props.handleAddItem}
               />
@@ -36,6 +56,7 @@ class Pages extends Component {
             element={
               <Cart
                 cartItems={this.props.cartItems}
+                symbol={this.props.symbol}
                 total={this.props.total}
                 handleAddQty={this.props.handleAddQty}
                 handleSubQty={this.props.handleSubQty}

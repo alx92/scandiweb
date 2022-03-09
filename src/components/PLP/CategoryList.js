@@ -9,7 +9,7 @@ class CategoryList extends Component {
       <div>
         {result.map((cat) => (
           <div key={cat.name}>
-            <Category categories={cat} />
+            <Category categories={cat} symbol={this.props.symbol} />
           </div>
         ))}
       </div>

@@ -12,7 +12,7 @@ class Category extends Component {
 
         {products.map((prod) => (
           <div key={prod.id}>
-            <ProductCard product={prod} />
+            <ProductCard product={prod} symbol={this.props.symbol} />
           </div>
         ))}
       </CategoryContainer>

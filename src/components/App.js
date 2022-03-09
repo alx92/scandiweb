@@ -11,6 +11,8 @@ class App extends React.Component {
       attr: [],
       cartItems: [],
       total: 0,
+      currencies: [],
+      symbol: "$",
     };
 
     this.handleOptions = this.handleOptions.bind(this);
@@ -18,6 +20,11 @@ class App extends React.Component {
     this.handleAddQty = this.handleAddQty.bind(this);
     this.handleSubQty = this.handleSubQty.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+  }
+
+  handleCurrencyChange(e) {
+    this.setState({ symbol: e.target.value });
   }
 
   handleOptions(attr, item) {
@@ -65,32 +72,44 @@ class App extends React.Component {
 
   handleAddItem(prod) {
     const finalProd = this.filterProd(prod);
-    let copyCartItems = [...this.state.cartItems];
-    const alreadyAdded = copyCartItems.find(
-      (item) =>
-        item.id === finalProd.id &&
-        this.arraysEqual(item.attributes, finalProd.attributes)
-    );
-
-    if (alreadyAdded) {
-      copyCartItems = copyCartItems.map((item) =>
-        item.id === finalProd.id &&
-        this.arraysEqual(item.attributes, finalProd.attributes)
-          ? { ...alreadyAdded, qty: alreadyAdded.qty + 1 }
-          : item
+    if (prod.attributes.length === finalProd.attributes.length) {
+      let copyCartItems = this.state.cartItems;
+      const alreadyAdded = copyCartItems.find(
+        (item) =>
+          item.id === finalProd.id &&
+          this.arraysEqual(item.attributes, finalProd.attributes)
       );
-      this.setState({
-        cartItems: [...copyCartItems],
-        total:
-          this.state.total + alreadyAdded.prices[0].amount * alreadyAdded.qty,
-        attr: [],
-      });
+
+      if (alreadyAdded) {
+        copyCartItems = copyCartItems.map((item) =>
+          item.id === finalProd.id &&
+          this.arraysEqual(item.attributes, finalProd.attributes)
+            ? { ...alreadyAdded, qty: alreadyAdded.qty + 1 }
+            : item
+        );
+        this.setState({
+          cartItems: copyCartItems,
+          total:
+            this.state.total +
+            alreadyAdded.prices.find(
+              (price) => price.currency.symbol === this.state.symbol
+            ).currency.amount *
+              alreadyAdded.qty,
+          attr: [],
+        });
+      } else {
+        this.setState({
+          cartItems: [...copyCartItems, { ...finalProd, qty: 1 }],
+          total:
+            this.state.total +
+            finalProd.prices.find(
+              (price) => price.currency.symbol === this.state.symbol
+            ).amount,
+          attr: [],
+        });
+      }
     } else {
-      this.setState({
-        cartItems: [...copyCartItems, { ...finalProd, qty: 1 }],
-        total: this.state.total + finalProd.prices[0].amount,
-        attr: [],
-      });
+      alert("Please select all the options before adding to cart!");
     }
   }
 
@@ -113,7 +132,11 @@ class App extends React.Component {
 
     this.setState({
       cartItems: newCartItems,
-      total: this.state.total + queriedProd.prices[0].amount,
+      total:
+        this.state.total +
+        queriedProd.prices.find(
+          (price) => price.currency.symbol === this.state.symbol
+        ).amount,
     });
   }
 
@@ -136,7 +159,11 @@ class App extends React.Component {
 
     this.setState({
       cartItems: [...newCartItems],
-      total: this.state.total - queriedProd.prices[0].amount,
+      total:
+        this.state.total -
+        queriedProd.prices.find(
+          (price) => price.currency.symbol === this.state.symbol
+        ).amount,
     });
   }
 
@@ -151,7 +178,10 @@ class App extends React.Component {
 
     this.setState({
       cartItems: [...copyCartItems],
-      total: this.state.total - prod.prices[0].amount,
+      total:
+        this.state.total -
+        prod.prices.find((price) => price.currency.symbol === this.state.symbol)
+          .amount,
     });
   }
 
@@ -188,31 +218,51 @@ class App extends React.Component {
         }
       }
     }`;
-    const payload = {
+    const currencyQuery = `query Currency {
+      currencies {
+        label
+        symbol
+      }
+    }`;
+
+    const catPayload = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: catQuery,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: catQuery }),
     };
 
-    const response = await fetch(url, payload);
-    const data = await response.json();
+    const catResponse = await fetch(url, catPayload);
+    const data = await catResponse.json();
     this.setState({ categories: data.data.categories, isFetching: false });
-    // console.log(data.data.categories);
+
+    const currencyPayload = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: currencyQuery }),
+    };
+
+    const currencyResponse = await fetch(url, currencyPayload);
+    const result = await currencyResponse.json();
+    this.setState({ currencies: result.data.currencies });
+
+    // console.log(result.data.currencies);
   }
 
   render() {
-    console.log(this.state.cartItems);
+    // console.log(this.state.currencies);
+    // console.log(this.state.symbol);
     return (
       <div>
-        <Header />
+        <Header
+          currencies={this.state.currencies}
+          handleCurrencyChange={this.handleCurrencyChange}
+        />
         <Pages
           cat={this.state.categories}
+          symbol={this.state.symbol}
           cartItems={this.state.cartItems}
           total={this.state.total}
+          handleCurrencyChange={this.handleCurrencyChange}
           handleOptions={this.handleOptions}
           handleAddItem={this.handleAddItem}
           handleAddQty={this.handleAddQty}

@@ -9,8 +9,20 @@ class CartItem extends React.Component {
       <div className="cart-item">
         <h3>{name}</h3>
         <h3>
-          {prices[0].currency.symbol}
-          {(Math.round(prices[0].amount * qty * 100) / 100).toFixed(2)}
+          {
+            prices.find((price) => price.currency.symbol === this.props.symbol)
+              .currency.symbol
+          }
+
+          {(
+            Math.round(
+              prices.find(
+                (price) => price.currency.symbol === this.props.symbol
+              ).amount *
+                qty *
+                100
+            ) / 100
+          ).toFixed(2)}
         </h3>
         <div className="attributes">
           {attributes.map((attr) =>

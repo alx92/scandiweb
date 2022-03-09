@@ -44,8 +44,16 @@ class ProductDetail extends Component {
 
           <h3>PRICE:</h3>
           <h2>
-            {prices[0].currency.symbol}
-            {prices[0].amount}
+            {
+              prices.find(
+                (price) => price.currency.symbol === this.props.symbol
+              ).currency.symbol
+            }
+            {
+              prices.find(
+                (price) => price.currency.symbol === this.props.symbol
+              ).amount
+            }
           </h2>
 
           <button onClick={() => this.props.handleAddItem(this.props.product)}>

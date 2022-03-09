@@ -12,6 +12,7 @@ class Product extends Component {
       <ProductDetail
         key={product.id}
         product={product}
+        symbol={this.props.symbol}
         handleOptions={this.props.handleOptions}
         handleAddItem={this.props.handleAddItem}
       />
