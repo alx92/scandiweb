@@ -10,7 +10,7 @@ class App extends React.Component {
       isFetching: true,
       attr: [],
       cartItems: [],
-      total: 0,
+      total: [],
       currencies: [],
       symbol: "$",
     };
@@ -89,22 +89,26 @@ class App extends React.Component {
         );
         this.setState({
           cartItems: copyCartItems,
-          total:
-            this.state.total +
-            alreadyAdded.prices.find(
-              (price) => price.currency.symbol === this.state.symbol
-            ).amount *
-              alreadyAdded.qty,
+          total: this.state.total.map((_, index) => ({
+            amount:
+              this.state.total[index].amount +
+              alreadyAdded.prices[index].amount * alreadyAdded.qty,
+            currency: alreadyAdded.prices[index].currency,
+          })),
           attr: [],
         });
       } else {
         this.setState({
           cartItems: [...copyCartItems, { ...finalProd, qty: 1 }],
           total:
-            this.state.total +
-            finalProd.prices.find(
-              (price) => price.currency.symbol === this.state.symbol
-            ).amount,
+            this.state.total.length === 0
+              ? [...finalProd.prices]
+              : this.state.total.map((_, index) => ({
+                  amount:
+                    this.state.total[index].amount +
+                    finalProd.prices[index].amount,
+                  currency: finalProd.prices[index].currency,
+                })),
           attr: [],
         });
       }
@@ -132,11 +136,11 @@ class App extends React.Component {
 
     this.setState({
       cartItems: newCartItems,
-      total:
-        this.state.total +
-        queriedProd.prices.find(
-          (price) => price.currency.symbol === this.state.symbol
-        ).amount,
+      total: this.state.total.map((_, index) => ({
+        amount:
+          this.state.total[index].amount + queriedProd.prices[index].amount,
+        currency: queriedProd.prices[index].currency,
+      })),
     });
   }
 
@@ -159,11 +163,11 @@ class App extends React.Component {
 
     this.setState({
       cartItems: [...newCartItems],
-      total:
-        this.state.total -
-        queriedProd.prices.find(
-          (price) => price.currency.symbol === this.state.symbol
-        ).amount,
+      total: this.state.total.map((_, index) => ({
+        amount:
+          this.state.total[index].amount - queriedProd.prices[index].amount,
+        currency: queriedProd.prices[index].currency,
+      })),
     });
   }
 
@@ -178,10 +182,10 @@ class App extends React.Component {
 
     this.setState({
       cartItems: [...copyCartItems],
-      total:
-        this.state.total -
-        prod.prices.find((price) => price.currency.symbol === this.state.symbol)
-          .amount,
+      total: this.state.total.map((_, index) => ({
+        amount: this.state.total[index].amount - prod.prices[index].amount,
+        currency: prod.prices[index].currency,
+      })),
     });
   }
 
