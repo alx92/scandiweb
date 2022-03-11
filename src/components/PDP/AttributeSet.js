@@ -13,6 +13,7 @@ class AttributeSet extends Component {
               <fieldset>
                 {attr.items.map((item) => (
                   <label
+                    htmlFor="color"
                     style={{
                       backgroundColor: `${item.value}`,
                       height: "25px",
@@ -21,6 +22,7 @@ class AttributeSet extends Component {
                     key={item.id}
                   >
                     <input
+                      id="color"
                       type="radio"
                       name={attr.id}
                       onClick={() => this.props.handleOptions(attr, item)}
@@ -35,9 +37,10 @@ class AttributeSet extends Component {
 
               <fieldset>
                 {attr.items.map((item) => (
-                  <label key={item.id}>
+                  <label htmlFor="radio" key={item.id}>
                     {item.value}
                     <input
+                      id="radio"
                       type="radio"
                       name={attr.id}
                       onClick={() => this.props.handleOptions(attr, item)}

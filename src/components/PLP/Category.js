@@ -7,15 +7,16 @@ class Category extends Component {
     const { name, products } = this.props.categories;
 
     return (
-      <CategoryContainer>
-        <h1>{name.toUpperCase()}</h1>
-
-        {products.map((prod) => (
-          <div key={prod.id}>
-            <ProductCard product={prod} symbol={this.props.symbol} />
-          </div>
-        ))}
-      </CategoryContainer>
+      <>
+        <CategoryName>{name.toUpperCase()}</CategoryName>
+        <CategoryContainer>
+          {products.map((prod) => (
+            <div key={prod.id}>
+              <ProductCard product={prod} symbol={this.props.symbol} />
+            </div>
+          ))}
+        </CategoryContainer>
+      </>
     );
   }
 }
@@ -23,7 +24,15 @@ class Category extends Component {
 export default Category;
 
 const CategoryContainer = styled.div({
-  display: "flex",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(230px, 2fr))",
+  gridGap: "20px",
   flexDirection: "column",
-  border: "4px solid black",
+  marginTop: "60px",
+  margin: "0px 60px 60px 60px",
+  // border: "4px solid black",
+});
+
+const CategoryName = styled.h1({
+  margin: "0px 60px 60px 60px",
 });

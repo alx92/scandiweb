@@ -75,6 +75,7 @@ export default ProductDetail;
 
 const MainContainer = styled.div({
   display: "flex",
+  margin: "0px 60px 60px 60px",
 });
 
 const FitImage = styled.div({
@@ -83,17 +84,22 @@ const FitImage = styled.div({
     height: "100%",
     width: "100%",
     objectFit: "fill",
+    marginBottom: "10px",
   },
+  cursor: "pointer",
+  boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
 });
 
 const Gallery = styled.div({
-  border: "1rem solid red",
+  // border: "1rem solid red",
   flex: "0.5",
+  marginRight: "15px",
 });
 
 const MainImage = styled.div({
-  border: "1rem solid red",
+  // border: "1rem solid red",
   flex: "2",
+  marginRight: "30px",
   img: {
     height: "100%",
     width: "100%",

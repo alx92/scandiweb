@@ -6,7 +6,7 @@ class Currency extends Component {
       <select onChange={(e) => this.props.handleCurrencyChange(e)}>
         {this.props.currencies.map((item) => (
           <option key={item.symbol} value={item.symbol}>
-            {item.symbol}
+            {item.symbol} {item.label}
           </option>
         ))}
       </select>

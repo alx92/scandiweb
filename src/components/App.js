@@ -67,6 +67,7 @@ class App extends React.Component {
       name: prod.name,
       attributes: options,
       prices: prod.prices,
+      gallery: prod.gallery,
     };
   }
 

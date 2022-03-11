@@ -9,9 +9,12 @@ class ProductCard extends Component {
     return (
       <ProdLink to={`/${id}`}>
         <ProdContainer>
-          <h4>{id}</h4>
-          <img src={gallery[0]} alt={name} />
+          <CardImageContainer>
+            <img src={gallery[0]} alt={name} />
+          </CardImageContainer>
+          <button onClick={(e) => e.preventDefault()}>Add</button>
           <h3>{name}</h3>
+
           <h4>
             {
               prices.find(
@@ -33,13 +36,36 @@ class ProductCard extends Component {
 export default ProductCard;
 
 const ProdContainer = styled.div({
-  backgroundColor: "#2eab4f",
-  border: "2px solid red",
+  // backgroundColor: "#2eab4f",
+  // border: "2px solid red",
+  boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
+  padding: "5px",
+  // display: "flex",
+  gridTemplateRows: "max-content 200px 1fr",
   img: {
-    objectFit: "cover",
-    width: "50%",
-    height: "50%",
+    objectFit: "contain",
+    width: "100%",
+    height: "100%",
   },
 });
 
-const ProdLink = styled(Link)({});
+const CardImageContainer = styled.div({
+  height: 300,
+  position: "relative",
+  // boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
+  backgroundColor: "white",
+  margin: "5px",
+  "::after": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+});
+
+const ProdLink = styled(Link)({
+  textDecoration: "none",
+  cursor: "pointer",
+});

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import CartItem from "./CartItem";
+import styled from "@emotion/styled";
 
 class Cart extends Component {
   render() {
     const cartItems = this.props.cartItems;
 
     return (
-      <div className="cart">
-        <h1>CART:</h1>
+      <StyledCart>
+        <h2>CART:</h2>
         {cartItems.length === 0 ? (
           <p>No items in your cart.</p>
         ) : (
@@ -35,9 +36,13 @@ class Cart extends Component {
             </h3>
           </div>
         )}
-      </div>
+      </StyledCart>
     );
   }
 }
 
 export default Cart;
+
+const StyledCart = styled.div({
+  margin: "0px 60px 60px 60px",
+});
