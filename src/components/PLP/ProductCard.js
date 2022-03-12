@@ -36,16 +36,29 @@ class ProductCard extends Component {
 export default ProductCard;
 
 const ProdContainer = styled.div({
-  // backgroundColor: "#2eab4f",
   // border: "2px solid red",
   boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
   padding: "5px",
-  // display: "flex",
   gridTemplateRows: "max-content 200px 1fr",
   img: {
     objectFit: "contain",
     width: "100%",
     height: "100%",
+  },
+  position: "relative",
+  button: {
+    position: "absolute",
+    backgroundColor: "#4CAF50",
+    border: "none",
+    color: "white",
+    padding: "10px 10px",
+    textAlign: "center",
+    textDecoration: "none",
+    display: "inline-block",
+    fontSize: "16px",
+    borderRadius: "50%",
+    bottom: "70px",
+    right: "25px",
   },
 });
 
@@ -53,16 +66,7 @@ const CardImageContainer = styled.div({
   height: 300,
   position: "relative",
   // boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
-  backgroundColor: "white",
   margin: "5px",
-  "::after": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
 });
 
 const ProdLink = styled(Link)({

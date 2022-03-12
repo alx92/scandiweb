@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Overlay from "./Cart/Overlay";
 import Currency from "./Currency/Currency";
 
 class Header extends Component {
@@ -17,7 +18,9 @@ class Header extends Component {
             currencies={this.props.currencies}
             handleCurrencyChange={this.props.handleCurrencyChange}
           />
-          <LinkStyle to="/cart">CART</LinkStyle>
+          <LinkStyle to="/cart">
+            🛒<span>7</span>
+          </LinkStyle>
         </div>
       </NavBar>
     );
@@ -27,12 +30,22 @@ class Header extends Component {
 export default Header;
 
 const LinkStyle = styled(Link)({
-  marginRight: "5px",
+  margin: "0px 5px",
   textDecoration: "none",
   fontSize: "1em",
   lineHeight: "0.8em",
   ":active": {
     color: "lightgreen",
+  },
+  position: "relative",
+  span: {
+    position: "absolute",
+    top: "-15px",
+    right: "-25px",
+    padding: "3px 7px",
+    borderRadius: "50%",
+    background: "black",
+    color: "white",
   },
 });
 
