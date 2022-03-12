@@ -10,44 +10,42 @@ class AttributeSet extends Component {
             <div key={attr.id}>
               <h4>{attr.id.toUpperCase()}:</h4>
 
-              <fieldset>
-                {attr.items.map((item) => (
-                  <label
-                    htmlFor="color"
-                    style={{
-                      backgroundColor: `${item.value}`,
-                      height: "25px",
-                      width: "25px",
-                    }}
-                    key={item.id}
-                  >
-                    <input
-                      id="color"
-                      type="radio"
-                      name={attr.id}
-                      onClick={() => this.props.handleOptions(attr, item)}
-                    ></input>
-                  </label>
-                ))}
-              </fieldset>
+              {attr.items.map((item) => (
+                <label
+                  htmlFor="color"
+                  style={{
+                    backgroundColor: `${item.value}`,
+                    // height: "25px",
+                    // width: "25px",
+                  }}
+                  key={item.id}
+                >
+                  <input
+                    disabled={!this.props.inStock}
+                    id="color"
+                    type="radio"
+                    name={attr.id}
+                    onClick={() => this.props.handleOptions(attr, item)}
+                  ></input>
+                </label>
+              ))}
             </div>
           ) : (
             <div key={attr.id}>
               <h4>{attr.id.toUpperCase()}:</h4>
 
-              <fieldset>
-                {attr.items.map((item) => (
-                  <label htmlFor="radio" key={item.id}>
-                    {item.value}
-                    <input
-                      id="radio"
-                      type="radio"
-                      name={attr.id}
-                      onClick={() => this.props.handleOptions(attr, item)}
-                    ></input>
-                  </label>
-                ))}
-              </fieldset>
+              {attr.items.map((item) => (
+                <label htmlFor="radio" key={item.id}>
+                  {item.value}
+                  <input
+                    disabled={!this.props.inStock}
+                    id="radio"
+                    type="radio"
+                    name={attr.id}
+                    onClick={() => this.props.handleOptions(attr, item)}
+                  ></input>
+                </label>
+              ))}
             </div>
           )
         )}

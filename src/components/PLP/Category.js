@@ -25,14 +25,12 @@ export default Category;
 
 const CategoryContainer = styled.div({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(230px, 2fr))",
-  gridGap: "20px",
+  gridTemplateColumns: "repeat(auto-fill, minmax(400px, 2fr))",
+  gridGap: "15px",
   flexDirection: "column",
-  marginTop: "60px",
   margin: "0px 60px 60px 60px",
-  // border: "4px solid black",
 });
 
 const CategoryName = styled.h1({
-  margin: "0px 60px 60px 60px",
+  margin: "0px 60px",
 });

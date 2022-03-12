@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Pages from "../pages/Pages";
+import index from "../index.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -68,6 +69,7 @@ class App extends React.Component {
       attributes: options,
       prices: prod.prices,
       gallery: prod.gallery,
+      inStock: prod.inStock,
     };
   }
 
@@ -261,6 +263,12 @@ class App extends React.Component {
         <Header
           currencies={this.state.currencies}
           handleCurrencyChange={this.handleCurrencyChange}
+          cartItems={this.state.cartItems}
+          symbol={this.state.symbol}
+          total={this.state.total}
+          handleAddQty={this.handleAddQty}
+          handleSubQty={this.handleSubQty}
+          handleRemove={this.handleRemove}
         />
         <Pages
           cat={this.state.categories}

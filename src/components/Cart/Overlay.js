@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import React, { Component } from "react";
 import Cart from "./Cart";
+import { LinkStyle } from "../Header";
 
 class Overlay extends Component {
   render() {
     return (
-      <StyledOverlay>
+      <StyledOverlay show={this.props.show}>
         <Cart
           cartItems={this.props.cartItems}
           symbol={this.props.symbol}
@@ -14,7 +15,9 @@ class Overlay extends Component {
           handleSubQty={this.props.handleSubQty}
           handleRemove={this.props.handleRemove}
         />
-        <button>VIEW BAG</button>
+        <button>
+          <LinkStyle to="cart">VIEW BAG</LinkStyle>
+        </button>
         <button>CHECKOUT</button>
       </StyledOverlay>
     );
@@ -23,27 +26,13 @@ class Overlay extends Component {
 
 export default Overlay;
 
-const StyledOverlay = styled.div({
-  margin: "auto",
-  width: "80%",
-  margin: "20px 0",
-  float: "right",
-  background: "white",
-  width: "320px",
-  position: "relative",
-  borderRadius: "3px",
-  padding: "20px",
-  ":after": {
-    bottom: "100%",
-    left: "89%",
-    border: "solid transparent",
-    content: '" "',
-    height: 0,
-    width: 0,
-    position: "absolute",
-    pointerEvents: "none",
-    borderBottomColor: "white",
-    borderWidth: "8px",
-    marginLeft: "-8px",
-  },
-});
+const StyledOverlay = styled.div((props) => ({
+  display: props.show ? "block" : "none",
+  position: "absolute",
+  top: "50px",
+  right: "-30px",
+  backgroundColor: "#f1f1f1",
+  minWidth: "160px",
+  boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
+  zIndex: 1,
+}));

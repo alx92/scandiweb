@@ -11,11 +11,11 @@ class ProductDetail extends Component {
 
   render() {
     // console.log(this.state.attr);
-    const { name, gallery, attributes, prices, description } =
+    const { name, gallery, attributes, prices, description, inStock } =
       this.props.product;
 
     return (
-      <MainContainer>
+      <MainContainer inStock={inStock}>
         <Gallery>
           {gallery.map((item) => (
             <FitImage key={item}>
@@ -33,11 +33,13 @@ class ProductDetail extends Component {
         <MainImage>
           <img ref={this.featuredImg} src={gallery[0]} alt={name}></img>
         </MainImage>
+        {!inStock ? <strong className="out-of-stock">OUT OF STOCK</strong> : ""}
 
         <ProductDetails>
           <h3>{name}</h3>
 
           <AttributeSet
+            inStock={inStock}
             attributes={attributes}
             handleOptions={this.props.handleOptions}
           />
@@ -56,7 +58,10 @@ class ProductDetail extends Component {
             }
           </h2>
 
-          <button onClick={() => this.props.handleAddItem(this.props.product)}>
+          <button
+            disabled={!inStock}
+            onClick={() => this.props.handleAddItem(this.props.product)}
+          >
             ADD TO CART
           </button>
 
@@ -73,10 +78,26 @@ class ProductDetail extends Component {
 
 export default ProductDetail;
 
-const MainContainer = styled.div({
-  display: "flex",
-  margin: "0px 60px 60px 60px",
-});
+const MainContainer = styled.div((props) =>
+  !props.inStock
+    ? {
+        opacity: "0.4",
+        filter: "alpha(opacity=40)",
+        display: "flex",
+        margin: "0px 60px 60px 60px",
+        ".out-of-stock": {
+          position: "absolute",
+          top: "40%",
+          right: "50%",
+          fontSize: "2.5em",
+          fontWeight: "700",
+        },
+      }
+    : {
+        display: "flex",
+        margin: "0px 60px 60px 60px",
+      }
+);
 
 const FitImage = styled.div({
   img: {
@@ -91,22 +112,28 @@ const FitImage = styled.div({
 });
 
 const Gallery = styled.div({
-  // border: "1rem solid red",
   flex: "0.5",
   marginRight: "15px",
 });
 
 const MainImage = styled.div({
-  // border: "1rem solid red",
   flex: "2",
-  marginRight: "30px",
   img: {
-    height: "100%",
-    width: "100%",
+    height: "60vh",
+    width: "60vw",
     objectFit: "contain",
   },
 });
 
 const ProductDetails = styled.div({
   flex: "1.5",
+  // input: {
+  //   width: "100%",
+  //   padding: "12px 20px",
+  //   margin: "8px 0",
+  //   display: "inline-block",
+  //   border: "1px solid #ccc",
+  //   borderRadius: "4px",
+  //   boxSizing: "border-box",
+  // },
 });

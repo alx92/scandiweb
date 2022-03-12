@@ -5,6 +5,13 @@ import Overlay from "./Cart/Overlay";
 import Currency from "./Currency/Currency";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+      badgeCount: 0,
+    };
+  }
   render() {
     return (
       <NavBar>
@@ -18,9 +25,20 @@ class Header extends Component {
             currencies={this.props.currencies}
             handleCurrencyChange={this.props.handleCurrencyChange}
           />
-          <LinkStyle to="/cart">
-            🛒<span>7</span>
-          </LinkStyle>
+          <DropDown>
+            <button onClick={() => this.setState({ show: !this.state.show })}>
+              🛒 &#9660;<span className="badge">7</span>
+            </button>
+            <Overlay
+              show={this.state.show}
+              cartItems={this.props.cartItems}
+              symbol={this.props.symbol}
+              total={this.props.total}
+              handleAddQty={this.props.handleAddQty}
+              handleSubQty={this.props.handleSubQty}
+              handleRemove={this.props.handleRemove}
+            />
+          </DropDown>
         </div>
       </NavBar>
     );
@@ -29,24 +47,31 @@ class Header extends Component {
 
 export default Header;
 
-const LinkStyle = styled(Link)({
+const DropDown = styled.div({
+  position: "relative",
+  display: "inline-block",
+  ".badge": {
+    position: "absolute",
+    top: "-15px",
+    right: "-15px",
+    padding: "3px 7px",
+    borderRadius: "50%",
+    background: "lightgreen",
+    color: "white",
+  },
+});
+
+export const LinkStyle = styled(Link)({
   margin: "0px 5px",
+  paddingLeft: "5px",
   textDecoration: "none",
   fontSize: "1em",
+  color: "black",
   lineHeight: "0.8em",
   ":active": {
     color: "lightgreen",
   },
-  position: "relative",
-  span: {
-    position: "absolute",
-    top: "-15px",
-    right: "-25px",
-    padding: "3px 7px",
-    borderRadius: "50%",
-    background: "black",
-    color: "white",
-  },
+  // position: "relative",
 });
 
 const NavBar = styled.nav({
