@@ -63,6 +63,8 @@ class App extends React.Component {
         index === self.findIndex((obj) => obj.id === value.id)
     );
 
+    options.sort((a, b) => (a.id.toUpperCase() > b.id.toUpperCase() ? 1 : -1));
+
     return {
       id: prod.id,
       name: prod.name,
