@@ -4,7 +4,7 @@ import withRouter from "../../utils/withRouter";
 
 class Product extends Component {
   render() {
-    const product = this.props.cat[0].products.find(
+    const product = JSON.parse(localStorage.getItem("cat"))[0].products.find(
       (prod) => prod.id === this.props.params.id
     );
 

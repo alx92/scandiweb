@@ -306,6 +306,8 @@ class App extends React.Component {
     const currencyResponse = await fetch(url, currencyPayload);
     const result = await currencyResponse.json();
     this.setState({ currencies: result.data.currencies });
+
+    localStorage.setItem("cat", JSON.stringify(data.data.categories));
   }
 
   componentDidUpdate() {
