@@ -14,6 +14,7 @@ class App extends React.Component {
       total: JSON.parse(localStorage.getItem("total")) || [],
       currencies: [],
       symbol: JSON.parse(localStorage.getItem("currency")) || "$",
+      badgeCount: JSON.parse(localStorage.getItem("badge")) || 0,
     };
 
     this.handleOptions = this.handleOptions.bind(this);
@@ -106,6 +107,7 @@ class App extends React.Component {
               currency: alreadyAdded.prices[index].currency,
             })),
             attr: [],
+            badgeCount: this.state.badgeCount + 1,
           },
           () => {
             localStorage.setItem(
@@ -113,6 +115,10 @@ class App extends React.Component {
               JSON.stringify(this.state.cartItems)
             );
             localStorage.setItem("total", JSON.stringify(this.state.total));
+            localStorage.setItem(
+              "badge",
+              JSON.stringify(this.state.badgeCount)
+            );
           }
         );
       } else {
@@ -132,6 +138,7 @@ class App extends React.Component {
                     currency: finalProd.prices[index].currency,
                   })),
             attr: [],
+            badgeCount: this.state.badgeCount + 1,
           },
           () => {
             localStorage.setItem(
@@ -139,6 +146,10 @@ class App extends React.Component {
               JSON.stringify(this.state.cartItems)
             );
             localStorage.setItem("total", JSON.stringify(this.state.total));
+            localStorage.setItem(
+              "badge",
+              JSON.stringify(this.state.badgeCount)
+            );
           }
         );
       }
@@ -177,10 +188,12 @@ class App extends React.Component {
             ) / 100,
           currency: queriedProd.prices[index].currency,
         })),
+        badgeCount: this.state.badgeCount + 1,
       },
       () => {
         localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems));
         localStorage.setItem("total", JSON.stringify(this.state.total));
+        localStorage.setItem("badge", JSON.stringify(this.state.badgeCount));
       }
     );
   }
@@ -214,10 +227,12 @@ class App extends React.Component {
             ) / 100,
           currency: queriedProd.prices[index].currency,
         })),
+        badgeCount: this.state.badgeCount - 1,
       },
       () => {
         localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems));
         localStorage.setItem("total", JSON.stringify(this.state.total));
+        localStorage.setItem("badge", JSON.stringify(this.state.badgeCount));
       }
     );
   }
@@ -241,10 +256,12 @@ class App extends React.Component {
             ) / 100,
           currency: prod.prices[index].currency,
         })),
+        badgeCount: this.state.badgeCount - 1,
       },
       () => {
         localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems));
         localStorage.setItem("total", JSON.stringify(this.state.total));
+        localStorage.setItem("badge", JSON.stringify(this.state.badgeCount));
       }
     );
   }
@@ -327,6 +344,7 @@ class App extends React.Component {
           cartItems={this.state.cartItems}
           symbol={this.state.symbol}
           total={this.state.total}
+          badgeCount={this.state.badgeCount}
           handleAddQty={this.handleAddQty}
           handleSubQty={this.handleSubQty}
           handleRemove={this.handleRemove}

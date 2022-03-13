@@ -9,7 +9,6 @@ class Header extends Component {
     super(props);
     this.state = {
       show: false,
-      badgeCount: 0,
     };
   }
   render() {
@@ -27,7 +26,7 @@ class Header extends Component {
           />
           <DropDown>
             <button onClick={() => this.setState({ show: !this.state.show })}>
-              🛒 &#9660;<span className="badge">7</span>
+              🛒 &#9660;<span className="badge">{this.props.badgeCount}</span>
             </button>
             <Overlay
               show={this.state.show}
