@@ -39,8 +39,13 @@ class CartItem extends React.Component {
               ).currency.symbol
             }
 
-            {prices.find((price) => price.currency.symbol === this.props.symbol)
-              .amount * qty}
+            {Math.round(
+              prices.find(
+                (price) => price.currency.symbol === this.props.symbol
+              ).amount *
+                qty *
+                100
+            ) / 100}
           </p>
         </LeftSide>
         <RightSide>

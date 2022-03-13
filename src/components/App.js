@@ -13,7 +13,7 @@ class App extends React.Component {
       cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
       total: JSON.parse(localStorage.getItem("total")) || [],
       currencies: [],
-      symbol: "$",
+      symbol: JSON.parse(localStorage.getItem("currency")) || "$",
     };
 
     this.handleOptions = this.handleOptions.bind(this);
@@ -26,6 +26,7 @@ class App extends React.Component {
 
   handleCurrencyChange(e) {
     this.setState({ symbol: e.target.value });
+    localStorage.setItem("currency", JSON.stringify(e.target.value));
   }
 
   handleOptions(attr, item) {
@@ -141,6 +142,7 @@ class App extends React.Component {
           }
         );
       }
+      window.location.reload();
     } else {
       alert("Please select all the options before adding to cart!");
     }
