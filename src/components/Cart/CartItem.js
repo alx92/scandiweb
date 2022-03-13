@@ -4,7 +4,6 @@ import React from "react";
 class CartItem extends React.Component {
   render() {
     const { name, gallery, prices, attributes, qty } = this.props.product;
-    // console.log("CartItem re-rendered!");
 
     return (
       <Item>
@@ -40,15 +39,8 @@ class CartItem extends React.Component {
               ).currency.symbol
             }
 
-            {(
-              Math.round(
-                prices.find(
-                  (price) => price.currency.symbol === this.props.symbol
-                ).amount *
-                  qty *
-                  100
-              ) / 100
-            ).toFixed(2)}
+            {prices.find((price) => price.currency.symbol === this.props.symbol)
+              .amount * qty}
           </p>
         </LeftSide>
         <RightSide>

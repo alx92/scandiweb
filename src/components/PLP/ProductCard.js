@@ -7,7 +7,6 @@ import { LinkStyle } from "../Header";
 class ProductCard extends Component {
   render() {
     const { id, gallery, name, prices, inStock } = this.props.product;
-    console.log(this.props.product);
 
     return (
       <LinkStyle to={`/${id}`}>

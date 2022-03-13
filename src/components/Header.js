@@ -50,6 +50,7 @@ export default Header;
 const DropDown = styled.div({
   position: "relative",
   display: "inline-block",
+
   ".badge": {
     position: "absolute",
     top: "-15px",
@@ -79,7 +80,7 @@ const NavBar = styled.nav({
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
-  borderBottom: `solid 2px lightgreen`,
+  borderBottom: "solid 2px lightgreen",
   boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
   padding: "5px 30px",
   minHeight: 50,

@@ -26,13 +26,11 @@ class Cart extends Component {
             <h3>TOTAL:</h3>
             <h3>
               {this.props.symbol}
-              {(
-                Math.round(
-                  this.props.total.find(
-                    (item) => item.currency.symbol === this.props.symbol
-                  ).amount * 100
-                ) / 100
-              ).toFixed(2)}
+              {
+                this.props.total.find(
+                  (item) => item.currency.symbol === this.props.symbol
+                ).amount
+              }
             </h3>
           </div>
         )}

@@ -10,8 +10,8 @@ class App extends React.Component {
       categories: [],
       isFetching: true,
       attr: [],
-      cartItems: [],
-      total: [],
+      cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
+      total: JSON.parse(localStorage.getItem("total")) || [],
       currencies: [],
       symbol: "$",
     };
@@ -92,30 +92,54 @@ class App extends React.Component {
             ? { ...alreadyAdded, qty: alreadyAdded.qty + 1 }
             : item
         );
-        this.setState({
-          cartItems: copyCartItems,
-          total: this.state.total.map((_, index) => ({
-            amount:
-              this.state.total[index].amount +
-              alreadyAdded.prices[index].amount * alreadyAdded.qty,
-            currency: alreadyAdded.prices[index].currency,
-          })),
-          attr: [],
-        });
+        this.setState(
+          {
+            cartItems: copyCartItems,
+            total: this.state.total.map((_, index) => ({
+              amount:
+                Math.round(
+                  (this.state.total[index].amount +
+                    alreadyAdded.prices[index].amount * alreadyAdded.qty) *
+                    100
+                ) / 100,
+              currency: alreadyAdded.prices[index].currency,
+            })),
+            attr: [],
+          },
+          () => {
+            localStorage.setItem(
+              "cartItems",
+              JSON.stringify(this.state.cartItems)
+            );
+            localStorage.setItem("total", JSON.stringify(this.state.total));
+          }
+        );
       } else {
-        this.setState({
-          cartItems: [...copyCartItems, { ...finalProd, qty: 1 }],
-          total:
-            this.state.total.length === 0
-              ? [...finalProd.prices]
-              : this.state.total.map((_, index) => ({
-                  amount:
-                    this.state.total[index].amount +
-                    finalProd.prices[index].amount,
-                  currency: finalProd.prices[index].currency,
-                })),
-          attr: [],
-        });
+        this.setState(
+          {
+            cartItems: [...copyCartItems, { ...finalProd, qty: 1 }],
+            total:
+              this.state.total.length === 0
+                ? [...finalProd.prices]
+                : this.state.total.map((_, index) => ({
+                    amount:
+                      Math.round(
+                        (this.state.total[index].amount +
+                          finalProd.prices[index].amount) *
+                          100
+                      ) / 100,
+                    currency: finalProd.prices[index].currency,
+                  })),
+            attr: [],
+          },
+          () => {
+            localStorage.setItem(
+              "cartItems",
+              JSON.stringify(this.state.cartItems)
+            );
+            localStorage.setItem("total", JSON.stringify(this.state.total));
+          }
+        );
       }
     } else {
       alert("Please select all the options before adding to cart!");
@@ -139,14 +163,24 @@ class App extends React.Component {
     let newCartItems = this.state.cartItems;
     newCartItems[indexQueriedProd] = queriedProd;
 
-    this.setState({
-      cartItems: newCartItems,
-      total: this.state.total.map((_, index) => ({
-        amount:
-          this.state.total[index].amount + queriedProd.prices[index].amount,
-        currency: queriedProd.prices[index].currency,
-      })),
-    });
+    this.setState(
+      {
+        cartItems: newCartItems,
+        total: this.state.total.map((_, index) => ({
+          amount:
+            Math.round(
+              (this.state.total[index].amount +
+                queriedProd.prices[index].amount) *
+                100
+            ) / 100,
+          currency: queriedProd.prices[index].currency,
+        })),
+      },
+      () => {
+        localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems));
+        localStorage.setItem("total", JSON.stringify(this.state.total));
+      }
+    );
   }
 
   handleSubQty(prod) {
@@ -166,14 +200,24 @@ class App extends React.Component {
     let newCartItems = [...this.state.cartItems];
     newCartItems[indexQueriedProd] = queriedProd;
 
-    this.setState({
-      cartItems: [...newCartItems],
-      total: this.state.total.map((_, index) => ({
-        amount:
-          this.state.total[index].amount - queriedProd.prices[index].amount,
-        currency: queriedProd.prices[index].currency,
-      })),
-    });
+    this.setState(
+      {
+        cartItems: [...newCartItems],
+        total: this.state.total.map((_, index) => ({
+          amount:
+            Math.round(
+              (this.state.total[index].amount -
+                queriedProd.prices[index].amount) *
+                100
+            ) / 100,
+          currency: queriedProd.prices[index].currency,
+        })),
+      },
+      () => {
+        localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems));
+        localStorage.setItem("total", JSON.stringify(this.state.total));
+      }
+    );
   }
 
   handleRemove(prod) {
@@ -185,13 +229,22 @@ class App extends React.Component {
     let copyCartItems = [...this.state.cartItems];
     copyCartItems.splice(indexQueriedProd, 1);
 
-    this.setState({
-      cartItems: [...copyCartItems],
-      total: this.state.total.map((_, index) => ({
-        amount: this.state.total[index].amount - prod.prices[index].amount,
-        currency: prod.prices[index].currency,
-      })),
-    });
+    this.setState(
+      {
+        cartItems: [...copyCartItems],
+        total: this.state.total.map((_, index) => ({
+          amount:
+            Math.round(
+              (this.state.total[index].amount - prod.prices[index].amount) * 100
+            ) / 100,
+          currency: prod.prices[index].currency,
+        })),
+      },
+      () => {
+        localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems));
+        localStorage.setItem("total", JSON.stringify(this.state.total));
+      }
+    );
   }
 
   async componentDidMount() {
@@ -253,8 +306,10 @@ class App extends React.Component {
     const currencyResponse = await fetch(url, currencyPayload);
     const result = await currencyResponse.json();
     this.setState({ currencies: result.data.currencies });
+  }
 
-    // console.log(result.data.currencies);
+  componentDidUpdate() {
+    // localStorage.clear();
   }
 
   render() {
