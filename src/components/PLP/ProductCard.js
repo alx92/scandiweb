@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import AttributeSet from "../PDP/AttributeSet";
-import ProductOptions from "./ProductOptions";
+// import AttributeSet from "../PDP/AttributeSet";
+// import ProductOptions from "./ProductOptions";
 
 /* 
   ------------- ProductCard Component -------------
@@ -10,8 +10,8 @@ import ProductOptions from "./ProductOptions";
 
 class ProductCard extends Component {
   render() {
-    const { id, gallery, name, prices, inStock, attributes } =
-      this.props.product;
+    // Destructuring product;
+    const { id, gallery, name, prices, inStock } = this.props.product;
 
     return (
       <CardLink to={`/${id}`}>
