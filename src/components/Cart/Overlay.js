@@ -34,7 +34,6 @@ const StyledCart = styled.div({
   margin: "0px 60px 60px 60px",
 });
 const Buttons = styled.div({
-  // justifyContent: "space-between",
   display: "flex",
 });
 

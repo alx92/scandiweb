@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import AttributeSet from "../PDP/AttributeSet";
+import ProductOptions from "./ProductOptions";
 
 class ProductCard extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     showOptions: false,
+  //   };
+  // }
+
   render() {
-    const { id, gallery, name, prices, inStock } = this.props.product;
+    const { id, gallery, name, prices, inStock, attributes } =
+      this.props.product;
 
     return (
       <CardLink to={`/${id}`}>
@@ -17,10 +27,25 @@ class ProductCard extends Component {
           ) : (
             ""
           )}
-          <button onClick={(e) => e.preventDefault()}>
-            {/* <img src="/cart_icon.png" alt="cart icon" /> */}
-            ADD
-          </button>
+          <div>
+            {/* <ProductOptions
+              product={this.props.product}
+              showOptions={this.state.showOptions}
+              inStock={inStock}
+              attributes={attributes}
+              handleOptions={this.props.handleOptions}
+            /> */}
+            <button
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   this.setState({ showOptions: !this.state.showOptions });
+            //   handlePopupAddToCart();
+            // }}
+            >
+              {/* <img src="/cart_icon.png" alt="cart icon" /> */}
+              ADD
+            </button>
+          </div>
           <h3>{name}</h3>
 
           <h4>
@@ -52,7 +77,7 @@ const ProdContainer = styled.div((props) =>
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
         padding: "5px",
         textDecoration: "none",
-        // gridTemplateRows: "max-content 150px 1fr",
+
         img: {
           objectFit: "contain",
           width: "100%",
@@ -86,7 +111,7 @@ const ProdContainer = styled.div((props) =>
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
         padding: "5px",
         textDecoration: "none",
-        // gridTemplateRows: "max-content 150px 1fr",
+
         img: {
           objectFit: "contain",
           width: "100%",
@@ -113,7 +138,6 @@ const ProdContainer = styled.div((props) =>
 const CardImageContainer = styled.div({
   height: 300,
   position: "relative",
-  // boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
   margin: "5px",
 });
 

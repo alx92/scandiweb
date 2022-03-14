@@ -334,8 +334,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.currencies);
-    // console.log(this.state.symbol);
     return (
       <div>
         <Header

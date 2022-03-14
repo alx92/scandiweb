@@ -19,6 +19,7 @@ class Header extends Component {
           <LinkStyle to="clothes">CLOTHES</LinkStyle>
           <LinkStyle to="tech">TECH</LinkStyle>
         </div>
+        <img src="/shopping_bag_icon.png" alt="icon" />
         <div className="right">
           <Currency
             currencies={this.props.currencies}
@@ -95,4 +96,12 @@ const NavBar = styled.nav({
   minHeight: 50,
   backgroundColor: "white",
   margin: "0px 60px 60px 60px",
+
+  ".right": {
+    marginLeft: "105px",
+  },
+
+  img: {
+    height: "45px",
+  },
 });

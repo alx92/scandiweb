@@ -10,7 +10,6 @@ class ProductDetail extends Component {
   }
 
   render() {
-    // console.log(this.state.attr);
     const { name, gallery, attributes, prices, description, inStock } =
       this.props.product;
 

@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import React, { Component } from "react";
 
 class Currency extends Component {

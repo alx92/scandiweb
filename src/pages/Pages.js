@@ -18,6 +18,7 @@ class Pages extends Component {
                 cat={this.props.cat}
                 currencies={this.props.currencies}
                 symbol={this.props.symbol}
+                handleOptions={this.props.handleOptions}
               />
             }
           />
@@ -28,6 +29,7 @@ class Pages extends Component {
                 name="clothes"
                 cat={this.props.cat}
                 symbol={this.props.symbol}
+                handleOptions={this.props.handleOptions}
               />
             }
           />
@@ -38,6 +40,7 @@ class Pages extends Component {
                 name="tech"
                 cat={this.props.cat}
                 symbol={this.props.symbol}
+                handleOptions={this.props.handleOptions}
               />
             }
           />
