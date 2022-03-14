@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import CategoryList from "../components/PLP/CategoryList";
 import Product from "../components/PDP/Product";
 import Cart from "../components/Cart/Cart";
+import styled from "@emotion/styled";
 
 class Pages extends Component {
   render() {
@@ -54,14 +55,16 @@ class Pages extends Component {
           <Route
             path="/cart"
             element={
-              <Cart
-                cartItems={this.props.cartItems}
-                symbol={this.props.symbol}
-                total={this.props.total}
-                handleAddQty={this.props.handleAddQty}
-                handleSubQty={this.props.handleSubQty}
-                handleRemove={this.props.handleRemove}
-              />
+              <StyledCartPage>
+                <Cart
+                  cartItems={this.props.cartItems}
+                  symbol={this.props.symbol}
+                  total={this.props.total}
+                  handleAddQty={this.props.handleAddQty}
+                  handleSubQty={this.props.handleSubQty}
+                  handleRemove={this.props.handleRemove}
+                />
+              </StyledCartPage>
             }
           />
           <Route
@@ -79,3 +82,10 @@ class Pages extends Component {
 }
 
 export default Pages;
+
+const StyledCartPage = styled.div({
+  padding: "0px 60px 0px 60px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  width: "40%",
+});

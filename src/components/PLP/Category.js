@@ -32,5 +32,5 @@ const CategoryContainer = styled.div({
 });
 
 const CategoryName = styled.h1({
-  margin: "0px 60px",
+  margin: "0px 60px 30px",
 });

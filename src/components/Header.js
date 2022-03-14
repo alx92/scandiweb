@@ -50,13 +50,20 @@ const DropDown = styled.div({
   position: "relative",
   display: "inline-block",
 
+  button: {
+    background: "white",
+    border: "none",
+    boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
+    marginLeft: "8px",
+  },
+
   ".badge": {
     position: "absolute",
     top: "-15px",
-    right: "-15px",
+    right: "-5px",
     padding: "3px 7px",
     borderRadius: "50%",
-    background: "lightgreen",
+    background: "#6dc93e",
     color: "white",
   },
 });
@@ -68,10 +75,13 @@ export const LinkStyle = styled(Link)({
   fontSize: "1em",
   color: "black",
   lineHeight: "0.8em",
-  ":active": {
+
+  ":hover": {
+    textDecoration: "underline",
+    textUnderlineOffset: "20px",
+    textDecorationThickness: "2px",
     color: "lightgreen",
   },
-  // position: "relative",
 });
 
 const NavBar = styled.nav({

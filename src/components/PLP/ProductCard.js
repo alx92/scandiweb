@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-import { LinkStyle } from "../Header";
-
 class ProductCard extends Component {
   render() {
     const { id, gallery, name, prices, inStock } = this.props.product;
 
     return (
-      <LinkStyle to={`/${id}`}>
+      <CardLink to={`/${id}`}>
         <ProdContainer inStock={inStock}>
           <CardImageContainer>
             <img src={gallery[0]} alt={name} />
@@ -19,7 +17,10 @@ class ProductCard extends Component {
           ) : (
             ""
           )}
-          <button onClick={(e) => e.preventDefault()}>Add</button>
+          <button onClick={(e) => e.preventDefault()}>
+            {/* <img src="/cart_icon.png" alt="cart icon" /> */}
+            ADD
+          </button>
           <h3>{name}</h3>
 
           <h4>
@@ -35,7 +36,7 @@ class ProductCard extends Component {
             }
           </h4>
         </ProdContainer>
-      </LinkStyle>
+      </CardLink>
     );
   }
 }
@@ -49,6 +50,7 @@ const ProdContainer = styled.div((props) =>
         filter: "alpha(opacity=40)",
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
         padding: "5px",
+        textDecoration: "none",
         // gridTemplateRows: "max-content 150px 1fr",
         img: {
           objectFit: "contain",
@@ -65,7 +67,7 @@ const ProdContainer = styled.div((props) =>
         },
         button: {
           position: "absolute",
-          backgroundColor: "lightgreen",
+          backgroundColor: "#6dc93e",
           border: "none",
           color: "white",
           padding: "10px 10px",
@@ -81,6 +83,7 @@ const ProdContainer = styled.div((props) =>
     : {
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
         padding: "5px",
+        textDecoration: "none",
         // gridTemplateRows: "max-content 150px 1fr",
         img: {
           objectFit: "contain",
@@ -90,7 +93,7 @@ const ProdContainer = styled.div((props) =>
         position: "relative",
         button: {
           position: "absolute",
-          backgroundColor: "lightgreen",
+          backgroundColor: "#6dc93e",
           border: "none",
           color: "white",
           padding: "10px 10px",
@@ -112,7 +115,7 @@ const CardImageContainer = styled.div({
   margin: "5px",
 });
 
-// const ProdLink = styled(Link)({
-//   textDecoration: "none",
-//   cursor: "pointer",
-// });
+const CardLink = styled(Link)({
+  textDecoration: "none",
+  color: "black",
+});

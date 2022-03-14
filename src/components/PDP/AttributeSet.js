@@ -13,12 +13,14 @@ class AttributeSet extends Component {
 
               {attr.items.map((item) => (
                 <div
+                  htmlFor={item.value}
                   key={item.id}
                   style={{
                     backgroundColor: `${item.value}`,
                   }}
                 >
                   <input
+                    id={item.value}
                     disabled={!this.props.inStock}
                     type="radio"
                     name={attr.id}
@@ -32,11 +34,11 @@ class AttributeSet extends Component {
               <h4>{attr.id.toUpperCase()}:</h4>
 
               {attr.items.map((item) => (
-                <label htmlFor="radio" key={item.id}>
+                <label htmlFor={item.value} key={item.id}>
                   {item.value}
                   <input
                     disabled={!this.props.inStock}
-                    id="radio"
+                    id={item.value}
                     type="radio"
                     name={attr.id}
                     onClick={() => this.props.handleOptions(attr, item)}
@@ -55,14 +57,13 @@ export default AttributeSet;
 
 const Swatch = styled.div({
   input: {
-    // opacity: 0,
-    // visibility: "hidden",
-    // height: "5px",
+    cursor: "pointer",
   },
   div: {
+    display: "inline-block",
     // color: "rgba(0, 0, 0, 0)",
-    boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
-    marginRight: "5px",
+    boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.35)",
+    marginRight: "2px",
     height: "40px",
     width: "40px",
   },

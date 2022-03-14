@@ -127,13 +127,14 @@ const MainImage = styled.div({
 
 const ProductDetails = styled.div({
   flex: "1.5",
-  // input: {
-  //   width: "100%",
-  //   padding: "12px 20px",
-  //   margin: "8px 0",
-  //   display: "inline-block",
-  //   border: "1px solid #ccc",
-  //   borderRadius: "4px",
-  //   boxSizing: "border-box",
-  // },
+  button: {
+    backgroundColor: "#6dc93e",
+    color: "white",
+    border: "none",
+    padding: "10px 30px",
+    textAlign: "center",
+    textDecoration: "none",
+    fontSize: "12px",
+    cursor: "pointer",
+  },
 });

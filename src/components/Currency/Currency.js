@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import React, { Component } from "react";
 
 class Currency extends Component {
@@ -9,7 +10,7 @@ class Currency extends Component {
       >
         {this.props.currencies.map((item) => (
           <option key={item.symbol} value={item.symbol}>
-            {item.symbol} {item.label}
+            {item.symbol}
           </option>
         ))}
       </select>

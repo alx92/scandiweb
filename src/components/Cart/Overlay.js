@@ -7,18 +7,22 @@ class Overlay extends Component {
   render() {
     return (
       <StyledOverlay show={this.props.show}>
-        <Cart
-          cartItems={this.props.cartItems}
-          symbol={this.props.symbol}
-          total={this.props.total}
-          handleAddQty={this.props.handleAddQty}
-          handleSubQty={this.props.handleSubQty}
-          handleRemove={this.props.handleRemove}
-        />
-        <button className="button1">
-          <LinkStyle to="cart">VIEW BAG</LinkStyle>
-        </button>
-        <button className="button2">CHECKOUT</button>
+        <StyledCart>
+          <Cart
+            cartItems={this.props.cartItems}
+            symbol={this.props.symbol}
+            total={this.props.total}
+            handleAddQty={this.props.handleAddQty}
+            handleSubQty={this.props.handleSubQty}
+            handleRemove={this.props.handleRemove}
+          />
+          <Buttons>
+            <button id="button1">
+              <LinkStyle to="cart">VIEW BAG</LinkStyle>
+            </button>
+            <button id="button2">CHECKOUT</button>
+          </Buttons>
+        </StyledCart>
       </StyledOverlay>
     );
   }
@@ -26,27 +30,39 @@ class Overlay extends Component {
 
 export default Overlay;
 
+const StyledCart = styled.div({
+  margin: "0px 60px 60px 60px",
+});
+const Buttons = styled.div({
+  // justifyContent: "space-between",
+  display: "flex",
+});
+
 const StyledOverlay = styled.div((props) => ({
-  ".button1": {
+  "#button1": {
     backgroundColor: "white",
     color: "black",
     border: "2px solid black",
-    padding: "13px 30px",
+    padding: "10px 30px",
     textAlign: "center",
     textDecoration: "none",
-    // display: "inline-block",
     fontSize: "12px",
-    margin: "15px",
+    transitionDuration: "0.4s",
+    whiteSpace: "nowrap",
   },
-  ".button2": {
+  "#button1:hover": {
+    backgroundColor: "#6dc93e",
+    color: "white",
+  },
+  "#button2": {
     backgroundColor: "#6dc93e",
     color: "white",
     border: "none",
-    padding: "15px 32px",
+    padding: "10px 30px",
     textAlign: "center",
     textDecoration: "none",
-    // display: "inline-block",
     fontSize: "12px",
+    whiteSpace: "nowrap",
   },
   display: props.show ? "block" : "none",
   position: "absolute",
