@@ -46,6 +46,7 @@ export default ProductCard;
 const ProdContainer = styled.div((props) =>
   !props.inStock
     ? {
+        "h3, h4": { paddingLeft: "25px" },
         opacity: "0.4",
         filter: "alpha(opacity=40)",
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
@@ -81,6 +82,7 @@ const ProdContainer = styled.div((props) =>
         },
       }
     : {
+        "h3, h4": { paddingLeft: "25px" },
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
         padding: "5px",
         textDecoration: "none",
