@@ -1,24 +1,35 @@
 import styled from "@emotion/styled";
 import React from "react";
 
+/* 
+  ------------- CartItem Component ------------- 
+*/
+
 class CartItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       slideIndex: 0,
     };
+
+    // Using React refs for cart item gallery slides;
     this.prev = React.createRef();
     this.next = React.createRef();
+
     this.changeIndex = this.changeIndex.bind(this);
   }
 
+  // Function to change slide image in cart item;
   changeIndex(n) {
+    // If the first picture is active and we go back then loop to last image;
+    // else just increse/decrease slide index
     if (this.state.slideIndex === 0 && n === -1) {
       this.setState({ slideIndex: this.props.product.gallery.length - 1 });
     } else if (this.state.slideIndex <= this.props.product.gallery.length - 1) {
       this.setState({ slideIndex: this.state.slideIndex + n });
     }
 
+    // If the active slide is the last one then loop to first image;
     if (
       this.state.slideIndex === this.props.product.gallery.length - 1 &&
       n > 0
@@ -28,6 +39,7 @@ class CartItem extends React.Component {
   }
 
   render() {
+    // Destructuring product;
     const { name, gallery, prices, attributes, qty } = this.props.product;
 
     return (
@@ -41,6 +53,7 @@ class CartItem extends React.Component {
                   <h5>{attr.id.toUpperCase()}:</h5>
                   <img
                     alt=""
+                    // Show actual colors instead of values;
                     style={{
                       backgroundColor: `${attr.value}`,
                       height: "25px",
@@ -116,6 +129,10 @@ class CartItem extends React.Component {
 
 export default CartItem;
 
+/* 
+  ------------- Styled Components -------------
+*/
+
 const Item = styled.div({
   justifyContent: "space-between",
   display: "flex",
@@ -140,6 +157,7 @@ const QtyChange = styled.div({
   span: {
     margin: "20px 0px",
   },
+
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -152,7 +170,9 @@ const CartItemImage = styled.div({
     width: "100px",
     objectFit: "contain",
   },
+
   position: "relative",
+
   a: {
     cursor: "pointer",
     position: "absolute",
@@ -175,5 +195,6 @@ const CartItemImage = styled.div({
 
   ".prev:hover": { backgroundColor: "rgba(0,0,0,0.8)" },
   ".next:hover": { backgroundColor: "rgba(0,0,0,0.8)" },
+
   boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
 });

@@ -5,6 +5,10 @@ import Product from "../components/PDP/Product";
 import Cart from "../components/Cart/Cart";
 import styled from "@emotion/styled";
 
+/*
+  ------------- Pages Component for Routing -------------
+*/
+
 class Pages extends Component {
   render() {
     return (
@@ -85,6 +89,10 @@ class Pages extends Component {
 }
 
 export default Pages;
+
+/* 
+  ------------- Styled Components -------------
+*/
 
 const StyledCartPage = styled.div({
   padding: "0px 60px 0px 60px",

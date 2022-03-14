@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import Overlay from "./Cart/Overlay";
 import Currency from "./Currency/Currency";
 
+/* 
+  ------------- Header Component with NavBar - this also holds the Cart Overlay -------------
+*/
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +23,14 @@ class Header extends Component {
           <LinkStyle to="clothes">CLOTHES</LinkStyle>
           <LinkStyle to="tech">TECH</LinkStyle>
         </div>
-        <img src="/shopping_bag_icon.png" alt="icon" />
+        {/* 
+          I know that in the requirements the icon is just an icon,
+          however I found it useful to point to the cart while making checks
+          so I'm leaving it here; 
+        */}
+        <Link to="/cart">
+          <img src="/shopping_bag_icon.png" alt="icon" />
+        </Link>
         <div className="right">
           <Currency
             currencies={this.props.currencies}
@@ -47,6 +58,10 @@ class Header extends Component {
 
 export default Header;
 
+/* 
+  ------------- Styled Components -------------
+*/
+
 const DropDown = styled.div({
   position: "relative",
   display: "inline-block",
@@ -61,7 +76,7 @@ const DropDown = styled.div({
   ".badge": {
     position: "absolute",
     top: "-15px",
-    right: "-5px",
+    right: "-10px",
     padding: "3px 7px",
     borderRadius: "50%",
     background: "#6dc93e",

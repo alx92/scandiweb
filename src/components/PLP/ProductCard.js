@@ -4,14 +4,11 @@ import { Link } from "react-router-dom";
 import AttributeSet from "../PDP/AttributeSet";
 import ProductOptions from "./ProductOptions";
 
-class ProductCard extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     showOptions: false,
-  //   };
-  // }
+/* 
+  ------------- ProductCard Component -------------
+*/
 
+class ProductCard extends Component {
   render() {
     const { id, gallery, name, prices, inStock, attributes } =
       this.props.product;
@@ -27,25 +24,9 @@ class ProductCard extends Component {
           ) : (
             ""
           )}
-          <div>
-            {/* <ProductOptions
-              product={this.props.product}
-              showOptions={this.state.showOptions}
-              inStock={inStock}
-              attributes={attributes}
-              handleOptions={this.props.handleOptions}
-            /> */}
-            <button
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   this.setState({ showOptions: !this.state.showOptions });
-            //   handlePopupAddToCart();
-            // }}
-            >
-              {/* <img src="/cart_icon.png" alt="cart icon" /> */}
-              ADD
-            </button>
-          </div>
+
+          <button>ADD</button>
+
           <h3>{name}</h3>
 
           <h4>
@@ -68,10 +49,15 @@ class ProductCard extends Component {
 
 export default ProductCard;
 
+/* 
+  ------------- Styled Components -------------
+*/
+
 const ProdContainer = styled.div((props) =>
   !props.inStock
     ? {
         "h3, h4": { paddingLeft: "25px" },
+
         opacity: "0.4",
         filter: "alpha(opacity=40)",
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
@@ -83,6 +69,7 @@ const ProdContainer = styled.div((props) =>
           width: "100%",
           height: "100%",
         },
+
         position: "relative",
         ".out-of-stock": {
           position: "absolute",
@@ -91,6 +78,7 @@ const ProdContainer = styled.div((props) =>
           fontSize: "1.5em",
           fontWeight: "400",
         },
+
         button: {
           position: "absolute",
           backgroundColor: "#6dc93e",
@@ -108,6 +96,7 @@ const ProdContainer = styled.div((props) =>
       }
     : {
         "h3, h4": { paddingLeft: "25px" },
+
         boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
         padding: "5px",
         textDecoration: "none",
@@ -117,7 +106,9 @@ const ProdContainer = styled.div((props) =>
           width: "100%",
           height: "100%",
         },
+
         position: "relative",
+
         button: {
           position: "absolute",
           backgroundColor: "#6dc93e",

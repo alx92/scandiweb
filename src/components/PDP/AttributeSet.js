@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import React, { Component } from "react";
 
+/* 
+  ------------- AttributeSet Component -------------
+*/
+
 class AttributeSet extends Component {
   render() {
     const attributes = this.props.attributes;
@@ -15,12 +19,14 @@ class AttributeSet extends Component {
                 <div
                   htmlFor={item.value}
                   key={item.id}
+                  // Showing colors instead of values;
                   style={{
                     backgroundColor: `${item.value}`,
                   }}
                 >
                   <input
                     id={item.value}
+                    // Make options not clickable when product is out of stock;
                     disabled={!this.props.inStock}
                     type="radio"
                     name={attr.id}
@@ -55,10 +61,15 @@ class AttributeSet extends Component {
 
 export default AttributeSet;
 
+/* 
+  ------------- Styled Components -------------
+*/
+
 const Swatch = styled.div({
   input: {
     cursor: "pointer",
   },
+
   div: {
     display: "inline-block",
     boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.35)",

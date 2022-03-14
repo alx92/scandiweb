@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import ProductCard from "./ProductCard";
 import styled from "@emotion/styled";
 
+/* 
+  ------------- Category Component -------------
+*/
+
 class Category extends Component {
   render() {
     const { name, products } = this.props.categories;
@@ -26,6 +30,10 @@ class Category extends Component {
 }
 
 export default Category;
+
+/* 
+  ------------- Styled Components -------------
+*/
 
 const CategoryContainer = styled.div({
   display: "grid",

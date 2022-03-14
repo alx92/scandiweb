@@ -2,6 +2,10 @@
 // import AttributeSet from "../PDP/AttributeSet";
 // import styled from "@emotion/styled";
 
+/* 
+  ------------- ProductOptions Component (draft) -------------
+*/
+
 // class ProductOptions extends Component {
 //   render() {
 //     const { id, gallery, name, prices, inStock, attributes } =

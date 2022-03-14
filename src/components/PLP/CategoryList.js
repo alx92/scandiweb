@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import Category from "./Category";
 
+/* 
+  ------------- CategoryList Component -------------
+*/
+
 class CategoryList extends Component {
   render() {
+    // Filtering the required category;
     const result = this.props.cat.filter((cat) => cat.name === this.props.name);
 
     return (

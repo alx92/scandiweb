@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import CartItem from "./CartItem";
 
+/* 
+  ------------- Cart Component ------------- 
+*/
+
 class Cart extends Component {
   render() {
     const cartItems = this.props.cartItems;

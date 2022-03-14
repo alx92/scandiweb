@@ -3,6 +3,10 @@ import DOMPurify from "dompurify";
 import styled from "@emotion/styled";
 import AttributeSet from "./AttributeSet";
 
+/* 
+  ------------- ProductDetail Component -------------
+*/
+
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +14,7 @@ class ProductDetail extends Component {
   }
 
   render() {
+    // Destructuring product;
     const { name, gallery, attributes, prices, description, inStock } =
       this.props.product;
 
@@ -21,6 +26,7 @@ class ProductDetail extends Component {
               <img
                 src={item}
                 alt={name}
+                // Using React refs to change images when clicked;
                 onClick={() => {
                   this.featuredImg.current.src = item;
                 }}
@@ -58,6 +64,7 @@ class ProductDetail extends Component {
           </h2>
 
           <button
+            // Making the button disabled if product out of stock;
             disabled={!inStock}
             onClick={() => this.props.handleAddItem(this.props.product)}
           >
@@ -65,6 +72,9 @@ class ProductDetail extends Component {
           </button>
 
           <div
+            // It's not really needed to use DOMPurify since the site is not deployed
+            // but since I've used something that has 'danger' in it
+            // I wanted to check how to safely implement this
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(description),
             }}
@@ -77,6 +87,10 @@ class ProductDetail extends Component {
 
 export default ProductDetail;
 
+/* 
+  ------------- Styled Components -------------
+*/
+
 const MainContainer = styled.div((props) =>
   !props.inStock
     ? {
@@ -84,6 +98,7 @@ const MainContainer = styled.div((props) =>
         filter: "alpha(opacity=40)",
         display: "flex",
         margin: "0px 60px 60px 60px",
+
         ".out-of-stock": {
           position: "absolute",
           top: "40%",
@@ -106,6 +121,7 @@ const FitImage = styled.div({
     objectFit: "fill",
     marginBottom: "10px",
   },
+
   cursor: "pointer",
   boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
 });
@@ -117,6 +133,7 @@ const Gallery = styled.div({
 
 const MainImage = styled.div({
   flex: "2",
+
   img: {
     height: "60vh",
     width: "60vw",
@@ -126,6 +143,7 @@ const MainImage = styled.div({
 
 const ProductDetails = styled.div({
   flex: "1.5",
+
   button: {
     backgroundColor: "#6dc93e",
     color: "white",

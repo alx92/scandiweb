@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 
+/* 
+  ------------- Overlay Component -------------
+*/
+
 class Overlay extends Component {
   render() {
     return (
@@ -29,6 +33,10 @@ class Overlay extends Component {
 }
 
 export default Overlay;
+
+/* 
+  ------------- Styled Components -------------
+*/
 
 const StyledLink = styled(Link)({
   margin: "0px 5px",
@@ -74,11 +82,11 @@ const StyledOverlay = styled.div((props) => ({
     fontSize: "12px",
     whiteSpace: "nowrap",
   },
+
   display: props.show ? "block" : "none",
   position: "absolute",
   top: "50px",
   right: "-30px",
-  boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
   background: "white",
   minWidth: "160px",
   boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
