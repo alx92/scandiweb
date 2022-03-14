@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React, { Component } from "react";
 import Cart from "./Cart";
-import { LinkStyle } from "../Header";
+import { Link } from "react-router-dom";
 
 class Overlay extends Component {
   render() {
@@ -18,7 +18,7 @@ class Overlay extends Component {
           />
           <Buttons>
             <button id="button1">
-              <LinkStyle to="cart">VIEW BAG</LinkStyle>
+              <StyledLink to="cart">VIEW BAG</StyledLink>
             </button>
             <button id="button2">CHECKOUT</button>
           </Buttons>
@@ -30,6 +30,15 @@ class Overlay extends Component {
 
 export default Overlay;
 
+const StyledLink = styled(Link)({
+  margin: "0px 5px",
+  paddingLeft: "5px",
+  textDecoration: "none",
+  fontSize: "1em",
+  color: "black",
+  lineHeight: "0.8em",
+});
+
 const StyledCart = styled.div({
   margin: "0px 60px 60px 60px",
 });
@@ -38,6 +47,11 @@ const Buttons = styled.div({
 });
 
 const StyledOverlay = styled.div((props) => ({
+  "#button1:hover": {
+    backgroundColor: "#6dc93e",
+    color: "white",
+  },
+
   "#button1": {
     backgroundColor: "white",
     color: "black",
@@ -49,10 +63,7 @@ const StyledOverlay = styled.div((props) => ({
     transitionDuration: "0.4s",
     whiteSpace: "nowrap",
   },
-  "#button1:hover": {
-    backgroundColor: "#6dc93e",
-    color: "white",
-  },
+
   "#button2": {
     backgroundColor: "#6dc93e",
     color: "white",
